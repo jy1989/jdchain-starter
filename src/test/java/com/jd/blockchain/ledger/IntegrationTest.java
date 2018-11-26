@@ -3,12 +3,9 @@ package com.jd.blockchain.ledger;
 import com.jd.blockchain.binaryproto.DataContractRegistry;
 import com.jd.blockchain.contract.model.ContractConfigure;
 import com.jd.blockchain.contract.model.ContractDeployExeUtil;
-import com.jd.blockchain.crypto.CryptoAlgorithm;
-import com.jd.blockchain.crypto.asymmetric.CryptoKeyPair;
 import com.jd.blockchain.crypto.asymmetric.PrivKey;
 import com.jd.blockchain.crypto.asymmetric.PubKey;
 import com.jd.blockchain.crypto.hash.HashDigest;
-import com.jd.blockchain.ledger.data.TxResponseMessage;
 import com.jd.blockchain.sdk.BlockchainService;
 import com.jd.blockchain.tools.keygen.KeyGenCommand;
 import my.utils.codec.Base58Utils;
@@ -17,7 +14,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
