@@ -38,7 +38,7 @@ public class IntegrationTest {
     String param1Val = "param1Val";
     BlockchainKeyPair ownerKey;
     HashDigest ledgerHash;
-    private int loopNum = 10;
+    private int loopNum = 3;
     private boolean useLoop = true;
 
     @Before
@@ -120,7 +120,7 @@ public class IntegrationTest {
             Thread.sleep(1000L);
             boolean deployResult = ContractDeployExeUtil.instance.deploy(host, port, ledger,ownerPubPath, ownerPrvPath, ownerPassword, chainCodePath,contractPub);
             System.out.println("deployResult="+deployResult);
-            Thread.sleep(5000L);
+            Thread.sleep(2000L);
             boolean exeResult = false;
             exeResult = ContractDeployExeUtil.instance.exeContract(ledger,ownerPubPath, ownerPrvPath, ownerPassword,eventName,contractArgs);
             System.out.println("execute the contract,result= "+exeResult);
