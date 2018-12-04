@@ -60,6 +60,9 @@ public class IntegrationTest extends BaseTest{
      */
     private boolean registerDataAccount(){
         BlockchainKeyPair dataAccount = BlockchainKeyGenerator.getInstance().generate();
+        //get the address,pubKey,privKey;
+        System.out.println("dataAccount-addr-pubkey-privkey:"
+                +dataAccount.getAddress()+","+dataAccount.getPubKey()+","+dataAccount.getPrivKey());
 
         // 定义交易,传输最简单的数字、字符串、提取合约中的地址;
         TransactionTemplate txTpl = bcsrv.newTransaction(ledgerHash);
@@ -88,7 +91,8 @@ public class IntegrationTest extends BaseTest{
         BlockchainKeyPair userPair = BlockchainKeyGenerator.getInstance().generate();
         TransactionTemplate txTpl = bcsrv.newTransaction(ledgerHash);
         txTpl.users().register(userPair.getIdentity());
-        System.out.println("userId= "+userPair.getAddress());
+        System.out.println("userPair-addr-pubkey-privkey:"
+                +userPair.getAddress()+","+userPair.getPubKey()+","+userPair.getPrivKey());
 
         // 签名；
         PreparedTransaction ptx = txTpl.prepare();

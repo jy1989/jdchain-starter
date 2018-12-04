@@ -14,6 +14,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -63,16 +68,21 @@ public class TracingTest extends BaseTest{
         return traceInfo;
     }
 
-    public void handleProduct(ProductInfo productInfo) {
+    public void handleProduct(Map<String,List<ProductInfo>> productMap) {
         TransactionTemplate txTemp = bcsrv.newTransaction(ledgerHash);
 
-        String key1 = productInfo.getSkuInfo().getSku()+"_"+productInfo.getSkuInfo().getCode()+"_"+productInfo.getProcess();
-        String _productInfo = JSONSerializeUtils.serializeToJSON(productInfo);
-        System.out.println("key1="+key1+",value="+_productInfo);
-        byte[] val1 = _productInfo.getBytes();
+        //根据用户处理对应的业务数据;
+        for (Map.Entry<String, List<ProductInfo>> entry : productMap.entrySet()) {
+            for(ProductInfo productInfo : entry.getValue()){
+                String key1 = productInfo.getSkuInfo().getSku()+"_"+productInfo.getSkuInfo().getCode()+"_"+productInfo.getProcess();
+                String _productInfo = JSONSerializeUtils.serializeToJSON(productInfo);
+                System.out.println("key1="+key1+",value="+_productInfo);
+                byte[] val1 = _productInfo.getBytes();
 
-        // 定义交易,传输最简单的数字、字符串、提取合约中的地址;
-        txTemp.dataAccount(productInfo.getUserId()).set(key1, val1, -1);
+                // 定义交易,传输最简单的数字、字符串、提取合约中的地址;
+                txTemp.dataAccount(productInfo.getUserId()).set(key1, val1, -1);
+            }
+        }
 
         // TX 准备就绪；
         PreparedTransaction prepTx = txTemp.prepare();
@@ -91,8 +101,19 @@ public class TracingTest extends BaseTest{
         //针对溯源数据进行深度解析;
         if(traceInfo!=null && "success".equals(traceInfo.getMessage())){
             ProductInfo[] productInfos = traceInfo.getData();
+            //将多个产品根据userId来进行分组;
+            Map<String,List<ProductInfo>> productMap = new HashMap<String,List<ProductInfo>>();
             for(ProductInfo productInfo : productInfos){
-                handleProduct(productInfo);
+                if(productMap.containsKey(productInfo.getUserId())){
+                    productMap.get(productInfo.getUserId()).add(productInfo);
+                }else {
+                    List <ProductInfo> productInfoList = new ArrayList<>();
+                    productInfoList.add(productInfo);
+                    productMap.put(productInfo.getUserId(),productInfoList);
+                }
+            }
+            if(productMap!=null && productMap.size()>0){
+                handleProduct(productMap);
             }
         }
     }
