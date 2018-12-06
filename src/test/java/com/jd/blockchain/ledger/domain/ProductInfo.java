@@ -1,7 +1,6 @@
-package com.jd.blockchain.domain;
+package com.jd.blockchain.ledger.domain;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.alibaba.fastjson.annotation.JSONType;
 
 /**
  * @Author zhaogw

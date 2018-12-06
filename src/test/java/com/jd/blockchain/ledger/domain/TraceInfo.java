@@ -1,4 +1,4 @@
-package com.jd.blockchain.domain;
+package com.jd.blockchain.ledger.domain;
 
 /**
  * @Author zhaogw
