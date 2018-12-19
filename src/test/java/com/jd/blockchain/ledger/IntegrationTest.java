@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
  * @Date 2018/10/31 10:31
  */
 public class IntegrationTest extends BaseTest{
-    private int loopNum = 3;
+    private int loopNum = 0;
     private boolean useLoop = true;
 
     /**

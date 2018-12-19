@@ -1,6 +1,7 @@
 package com.jd.blockchain.contract;
 
 import com.jd.blockchain.contract.model.*;
+import com.jd.blockchain.ledger.KVDataEntry;
 import my.utils.BaseConstant;
 
 /**
@@ -16,6 +17,9 @@ public class AssetContract3 implements EventProcessingAwire {
 		if(args_ == null){
 			return;
 		}
+
+//		KVDataEntry[] kvEntries = eventContext.getLedger().getDataEntries(eventContext.getCurrentLedgerHash(),
+//				"", "");
 		String[] args = new String(args_).split(BaseConstant.DELIMETER_DOUBLE_ALARM);
 
 		long amount = Long.parseLong(args[0]);
