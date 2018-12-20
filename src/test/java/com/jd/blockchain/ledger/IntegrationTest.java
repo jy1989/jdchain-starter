@@ -40,7 +40,7 @@ public class IntegrationTest extends BaseTest{
      */
     private void deploy_exe_contract_on_test_gateway(){
         //then exe the contract;
-        //由于合约发布之后需要后台进行共识处理，需要一定的事件消耗，先休息5秒钟之后再执行;
+        //由于合约发布之后需要后台进行共识处理，需要一定的时间消耗，先休息5秒钟之后再执行;
         try {
             Thread.sleep(1000L);
             boolean deployResult = ContractDeployExeUtil.instance.deploy(host, port, ledger,ownerPubPath, ownerPrvPath, ownerPassword, chainCodePath,contractPub);

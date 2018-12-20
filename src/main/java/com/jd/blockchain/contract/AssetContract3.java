@@ -12,7 +12,7 @@ import my.utils.BaseConstant;
 public class AssetContract3 implements EventProcessingAwire {
 
 	@ContractEvent(name = "issue-asset")
-	public void test1(ContractEventContext eventContext) throws Exception{
+	public void test1(ContractEventContext eventContext){
 		byte [] args_ = eventContext.getArgs();
 		if(args_ == null){
 			return;
