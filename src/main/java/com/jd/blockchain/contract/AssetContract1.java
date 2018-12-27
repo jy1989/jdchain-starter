@@ -205,7 +205,7 @@ public class AssetContract1 implements EventProcessingAwire {
 
 		Map<String, BlockchainIdentity> ownerMap = new HashMap<>();
 		for (BlockchainIdentity o : owners) {
-			ownerMap.put(o.getAddress(), o);
+			ownerMap.put(o.getAddress().toBase58(), o);
 		}
 		for (BlockchainIdentity r : requestors) {
 			System.out.println("checkAllOwnersAgreementPermission(),r.getAddress:"+r.getAddress());
