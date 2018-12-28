@@ -106,7 +106,7 @@ public class IntegrationTest extends BaseTest{
         //然后休息2秒后,验证是否有此用户;
         Thread.sleep(2000);
         //query
-        UserInfo userInfo = bcsrv.getUser(ledgerHash,userPair.getAddress());
+        UserInfo userInfo = bcsrv.getUser(ledgerHash,userPair.getAddress().toBase58());
         Assert.assertEquals(userPair.getAddress(),userInfo.getAddress());
     }
 
