@@ -1,15 +1,20 @@
 package com.jd.blockchain.ledger;
 
 import com.jd.blockchain.binaryproto.DataContractRegistry;
+import com.jd.blockchain.contract.model.ContractConfigure;
 import com.jd.blockchain.contract.model.ContractDeployExeUtil;
 import com.jd.blockchain.crypto.asymmetric.PrivKey;
 import com.jd.blockchain.crypto.asymmetric.PubKey;
+import com.jd.blockchain.crypto.asymmetric.SignatureDigest;
 import com.jd.blockchain.crypto.hash.HashDigest;
+import com.jd.blockchain.crypto.serialize.ByteArrayObjectDeserializer;
+import com.jd.blockchain.crypto.serialize.ByteArrayObjectSerializer;
 import com.jd.blockchain.sdk.BlockchainService;
 import com.jd.blockchain.tools.keygen.KeyGenCommand;
+import my.utils.Bytes;
 import my.utils.codec.Base58Utils;
-import my.utils.io.ContractConfigure;
 import my.utils.io.FileUtils;
+import my.utils.serialize.json.JSONSerializeUtils;
 import org.junit.Before;
 
 /**
@@ -33,6 +38,16 @@ public class BaseTest {
     String param1Val = "param1Val";
     BlockchainKeyPair ownerKey;
     HashDigest ledgerHash;
+
+    private static final Class<?>[] BYTEARRAY_JSON_SERIALIZE_CLASS = new Class<?>[]{HashDigest.class, PubKey.class,
+            SignatureDigest.class, Bytes.class};
+    static {
+        for (Class<?> byteArrayClass : BYTEARRAY_JSON_SERIALIZE_CLASS) {
+            JSONSerializeUtils.configSerialization(byteArrayClass,
+                    ByteArrayObjectSerializer.getInstance(byteArrayClass),
+                    ByteArrayObjectDeserializer.getInstance(byteArrayClass));
+        }
+    }
 
     @Before
     public void setup(){
