@@ -11,10 +11,10 @@ import com.jd.blockchain.crypto.serialize.ByteArrayObjectDeserializer;
 import com.jd.blockchain.crypto.serialize.ByteArrayObjectSerializer;
 import com.jd.blockchain.sdk.BlockchainService;
 import com.jd.blockchain.tools.keygen.KeyGenCommand;
-import my.utils.Bytes;
-import my.utils.codec.Base58Utils;
-import my.utils.io.FileUtils;
-import my.utils.serialize.json.JSONSerializeUtils;
+import com.jd.blockchain.utils.Bytes;
+import com.jd.blockchain.utils.codec.Base58Utils;
+import com.jd.blockchain.utils.io.FileUtils;
+import com.jd.blockchain.utils.serialize.json.JSONSerializeUtils;
 import org.junit.Before;
 
 /**
@@ -52,7 +52,7 @@ public class BaseTest {
     @Before
     public void setup(){
         host = ContractConfigure.instance.values("host");
-        port = Integer.parseInt(ContractConfigure.instance.values("port"));;
+        port = Integer.parseInt(ContractConfigure.instance.values("port"));
         ledger = ContractConfigure.instance.values("ledgerHash");
         ownerPubPath = ContractConfigure.instance.values("ownerPubPath");
         ownerPrvPath = ContractConfigure.instance.values("ownerPrvPath");

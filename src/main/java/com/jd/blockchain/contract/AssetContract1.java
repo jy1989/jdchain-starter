@@ -5,9 +5,9 @@ import com.jd.blockchain.crypto.CryptoAlgorithm;
 import com.jd.blockchain.crypto.asymmetric.PubKey;
 import com.jd.blockchain.crypto.hash.HashDigest;
 import com.jd.blockchain.ledger.*;
-import my.utils.BaseConstant;
-import my.utils.codec.Base58Utils;
-import my.utils.io.ByteArray;
+import com.jd.blockchain.utils.BaseConstant;
+import com.jd.blockchain.utils.codec.Base58Utils;
+import com.jd.blockchain.utils.io.ByteArray;
 
 import java.util.HashMap;
 import java.util.Map;

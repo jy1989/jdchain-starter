@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <contract.version>0.8.1-SNAPSHOT</contract.version>
-        <ledger.version>0.8.1-SNAPSHOT</ledger.version>
+        <contract.version>0.8.1.RELEASE</contract.version>
+        <ledger.version>0.8.1.RELEASE</ledger.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <log4j.version>2.11.1</log4j.version>
         <slf4j.version>1.7.25</slf4j.version>
@@ -22,7 +22,7 @@
         <sParam>${project.build.sourceDirectory}</sParam>
         <oParam>${project.build.directory}/contract/</oParam>
         <!--<cpParam>/Users/zhangliang21/IdeaProjects/prototype/contract-libs/coreLib/</cpParam>-->
-        <cpParam>lib/share/</cpParam>
+        <cpParam>lib/share</cpParam>
         <eParam>utf-8</eParam>
         <host>192.168.151.45</host>
         <port>8081</port>
@@ -115,7 +115,7 @@
             <plugin>
                 <groupId>com.jd.blockchain</groupId>
                 <artifactId>contract-maven-plugin</artifactId>
-                <version>0.8.1-SNAPSHOT</version>
+                <version>1.7.0-SNAPSHOT</version>
                 <configuration>
                     <cParam>${cParam}</cParam>
                     <sParam>${sParam}</sParam>

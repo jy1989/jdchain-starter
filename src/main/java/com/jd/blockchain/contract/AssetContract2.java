@@ -3,7 +3,7 @@ package com.jd.blockchain.contract;
 import com.jd.blockchain.contract.model.*;
 import com.jd.blockchain.crypto.hash.HashDigest;
 import com.jd.blockchain.ledger.KVDataEntry;
-import my.utils.BaseConstant;
+import com.jd.blockchain.utils.BaseConstant;
 
 /**
  * 模拟用智能合约;

@@ -2,7 +2,7 @@ package com.jd.blockchain.ledger;
 
 import com.jd.blockchain.ledger.domain.ProductInfo;
 import com.jd.blockchain.ledger.domain.TraceInfo;
-import my.utils.serialize.json.JSONSerializeUtils;
+import com.jd.blockchain.utils.serialize.json.JSONSerializeUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;

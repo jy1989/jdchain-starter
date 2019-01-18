@@ -4,10 +4,8 @@ import com.jd.blockchain.contract.model.*;
 import com.jd.blockchain.ledger.BlockchainKeyGenerator;
 import com.jd.blockchain.ledger.BlockchainKeyPair;
 import com.jd.blockchain.ledger.KVDataEntry;
-import com.jd.blockchain.ledger.KVDataObject;
-import my.utils.BaseConstant;
-import my.utils.codec.Base58Utils;
-import my.utils.io.ByteArray;
+import com.jd.blockchain.utils.BaseConstant;
+import com.jd.blockchain.utils.io.ByteArray;
 
 /**
  * 模拟用智能合约;
