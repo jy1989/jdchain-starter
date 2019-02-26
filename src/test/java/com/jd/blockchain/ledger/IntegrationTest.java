@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
  * @Date 2018/10/31 10:31
  */
 public class IntegrationTest extends BaseTest{
-    private int loopNum = 0;
+    private int loopNum = 1;
     private boolean useLoop = true;
 
     /**
@@ -22,10 +22,10 @@ public class IntegrationTest extends BaseTest{
         //then exe the contract;
         //由于合约发布之后需要后台进行共识处理，需要一定的事件消耗，先休息5秒钟之后再执行;
         try {
-            Thread.sleep(1000L);
+//            Thread.sleep(1000L);
             boolean deployResult = ContractDeployExeUtil.instance.deploy(host, port, ledger,ownerPubPath, ownerPrvPath, ownerPassword, chainCodePath,contractPub);
             System.out.println("deployResult="+deployResult);
-            Thread.sleep(5000L);
+            Thread.sleep(1000L);
             boolean exeResult = ContractDeployExeUtil.instance.exeContract(ledger,ownerPubPath, ownerPrvPath, ownerPassword,eventName,contractArgs);
             System.out.println("execute the contract,result= "+exeResult);
             boolean registerResult = registerDataAccount();
@@ -42,10 +42,10 @@ public class IntegrationTest extends BaseTest{
         //then exe the contract;
         //由于合约发布之后需要后台进行共识处理，需要一定的时间消耗，先休息5秒钟之后再执行;
         try {
-            Thread.sleep(1000L);
+//            Thread.sleep(1000L);
             boolean deployResult = ContractDeployExeUtil.instance.deploy(host, port, ledger,ownerPubPath, ownerPrvPath, ownerPassword, chainCodePath,contractPub);
             System.out.println("deployResult="+deployResult);
-            Thread.sleep(2000L);
+            Thread.sleep(1000L);
             boolean exeResult = false;
             exeResult = ContractDeployExeUtil.instance.exeContract(ledger,ownerPubPath, ownerPrvPath, ownerPassword,eventName,contractArgs);
             System.out.println("execute the contract,result= "+exeResult);
