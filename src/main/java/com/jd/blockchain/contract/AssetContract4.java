@@ -17,7 +17,7 @@ public class AssetContract4 implements EventProcessingAwire {
 	String param1 = "param1";
 	String param1Val = "param1Val";
 
-	@ContractEvent(name = "event1")
+	@ContractEvent(name = "issue-asset")
 	public void test1(ContractEventContext eventContext) throws Exception{
 		byte [] args_ = eventContext.getArgs();
 		if(args_ == null){

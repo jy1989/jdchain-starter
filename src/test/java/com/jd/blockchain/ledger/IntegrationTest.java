@@ -12,8 +12,8 @@ import static org.junit.Assert.assertTrue;
  * @Date 2018/10/31 10:31
  */
 public class IntegrationTest extends BaseTest{
-    private int loopNum = 1;
-    private boolean useLoop = true;
+    private int loopNum = 0;
+    private boolean useLoop = false;
 
     /**
      * 在测试链中发布合约-执行合约-注册数据集；
@@ -182,10 +182,14 @@ public class IntegrationTest extends BaseTest{
         String key2 = "jd_key2";
         byte[] val2 = "www.jd.com".getBytes();
 
+        String key3 = "jd_key3";
+        byte[] val3 = "www.jd.com".getBytes();
+
         // 定义交易,传输最简单的数字、字符串、提取合约中的地址;
         txTemp.dataAccounts().register(dataAccount.getIdentity());
         txTemp.dataAccount(dataAccount.getAddress()).set(key1, val1, -1);
         txTemp.dataAccount(dataAccount.getAddress()).set(key2, val2, -1);
+        txTemp.dataAccount(dataAccount.getAddress()).set(key3, val3, -1);
 
         // TX 准备就绪；
         PreparedTransaction prepTx = txTemp.prepare();
