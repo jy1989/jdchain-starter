@@ -47,8 +47,8 @@
 
         <dependency>
             <groupId>com.jd.blockchain</groupId>
-            <artifactId>ledger-core</artifactId>
-            <version>${ledger.version}</version>
+            <artifactId>contract-model</artifactId>
+            <version>${contract.version}</version>
         </dependency>
 
         <dependency>
