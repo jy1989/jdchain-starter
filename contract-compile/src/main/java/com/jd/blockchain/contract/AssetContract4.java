@@ -10,7 +10,6 @@ import com.jd.blockchain.utils.io.ByteArray;
 /**
  * 模拟用智能合约;
  * 测试从链中取数据，然后对比是否与预定值一致；param1Val 的值要与IntegrationTest中保持一致;
- * 目前在合约中直接set数值，共识需要进一步完善;
  */
 @Contract
 public class AssetContract4 implements EventProcessingAwire {

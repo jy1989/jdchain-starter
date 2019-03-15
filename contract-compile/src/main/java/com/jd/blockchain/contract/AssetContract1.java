@@ -15,7 +15,6 @@ import java.util.Set;
 
 /**
  * 模拟用智能合约;
- * 暴力测试是否通过安全校验;
  */
 @Contract
 public class AssetContract1 implements EventProcessingAwire {

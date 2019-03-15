@@ -1,7 +1,7 @@
 package com.jd.blockchain.ledger;
 
 import com.jd.blockchain.binaryproto.DataContractRegistry;
-import com.jd.blockchain.contract.model.ContractConfigure;
+import com.jd.blockchain.contract.ContractConfigure;
 import com.jd.blockchain.contract.model.ContractDeployExeUtil;
 import com.jd.blockchain.crypto.asymmetric.PrivKey;
 import com.jd.blockchain.crypto.asymmetric.PubKey;
