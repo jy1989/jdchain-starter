@@ -26,6 +26,8 @@ public class AssetContract3 implements EventProcessingAwire {
 		String contractDataAddress = args[2];
 		System.out.println("###@@@,in contract3,invoke test1(),amountAdd:"+(amount+amount1)+
 				",contractDataAddress= "+contractDataAddress);
+		//test the policy;
+		System.out.println("user.dir="+System.getProperty("user.dir"));
 	}
 
 	@ContractEvent(name = "multi")
