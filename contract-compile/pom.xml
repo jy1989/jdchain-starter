@@ -47,7 +47,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>com.jd.blockchain.contract.AssetContract2</mainClass>
+                            <mainClass>com.jd.blockchain.contract.AssetContract3</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
