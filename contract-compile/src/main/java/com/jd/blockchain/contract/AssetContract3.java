@@ -28,6 +28,23 @@ public class AssetContract3 implements EventProcessingAwire {
 				",contractDataAddress= "+contractDataAddress);
 		//test the policy;
 		System.out.println("user.dir="+System.getProperty("user.dir"));
+		System.out.println("java.home="+System.getProperty("java.home"));
+		//如下都不需要permission;
+		System.out.println("line.separator="+System.getProperty("line.separator"));
+		System.out.println("path.separator="+System.getProperty("path.separator"));
+		System.out.println("java.version="+System.getProperty("java.version"));
+		System.out.println("file.separator="+System.getProperty("file.separator"));
+		System.out.println("os.version="+System.getProperty("os.version"));
+		System.out.println("os.name="+System.getProperty("os.name"));
+		System.out.println("java.specification.version="+System.getProperty("java.specification.version"));
+		System.out.println("java.specification.name="+System.getProperty("java.specification.name"));
+
+		System.out.println("java.vm.specification.version="+System.getProperty("java.vm.specification.version"));
+		System.out.println("java.vm.specification.name="+System.getProperty("java.vm.specification.name"));
+		System.out.println("java.vm.version="+System.getProperty("java.vm.version"));
+		System.out.println("java.vm.name="+System.getProperty("java.vm.name"));
+
+
 	}
 
 	@ContractEvent(name = "multi")

@@ -32,9 +32,21 @@ public class AssetContract4 implements EventProcessingAwire {
 
 		BlockchainKeyPair dataAccount = BlockchainKeyGenerator.getInstance().generate();
 		//TODO:register牵扯到账本中的事务处理，需要优化;
-//		contractEventContext.getLedger().dataAccounts().register(dataAccount.getIdentity());
-//		contractEventContext.getLedger().dataAccount(dataAccount.getAddress()).
-//				set(param1,param1Val.getBytes(),-1).getOperation();
+		eventContext.getLedger().dataAccounts().register(dataAccount.getIdentity());
+		eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+                set(param1,param1Val.getBytes(),-1);
+        eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+                set("param2","参数2的val".getBytes(),-1);
+        eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+                set("param3","参数3的val".getBytes(),-1);
+        eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+                set("param4","{'a':'aVal','b':'bVal'}".getBytes(),-1);
+        eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+				set("param5","{'a':'aVal','b':'bVal'}",-1);
+		eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+				set("param6",123456798,-1);
+		eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+				set("param7","这Y的不是json",-1);
 		System.out.println("data address="+dataAccount.getAddress());
 	}
 

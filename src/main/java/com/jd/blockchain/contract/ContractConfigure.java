@@ -42,8 +42,7 @@ public enum ContractConfigure {
                 pp = FileUtils.readProperties(file, BaseConstant.CHARSET_UTF_8);
             }
         } catch (Exception e) {
-            LOGGER.info(SYS_CONTRACT_PROPS_NAME+"文件异常!");
-            e.printStackTrace();
+            LOGGER.info(SYS_CONTRACT_PROPS_NAME+"文件异常!"+e.getMessage());
         }
     }
 
