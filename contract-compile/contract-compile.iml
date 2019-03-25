@@ -15,22 +15,22 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:sdk-client:0.8.2.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:sdk-base:0.8.2.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:ledger-model:0.8.2.RELEASE" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:consensus-framework:0.8.2.RELEASE" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:utils-serialize:0.8.2.RELEASE" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:utils-web:0.8.2.RELEASE" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.springframework:spring-web:5.0.10.RELEASE" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:utils-http:0.8.2.RELEASE" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.springframework:spring-core:5.0.10.RELEASE" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.springframework:spring-jcl:5.0.10.RELEASE" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:tools-keygen:0.8.2.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:binary-proto:0.8.2.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:crypto-framework:0.8.2.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:base:0.8.2.RELEASE" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:binary-proto:0.8.2.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:utils-common:0.8.2.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.i2p.crypto:eddsa:0.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.bouncycastle:bcprov-jdk15on:1.59" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.springframework:spring-beans:5.0.10.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.springframework:spring-core:5.0.10.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.springframework:spring-jcl:5.0.10.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:utils-web:0.8.2.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:utils-http:0.8.2.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.springframework:spring-web:5.0.10.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:consensus-framework:0.8.2.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:utils-serialize:0.8.2.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.jd.blockchain:tools-keygen:0.8.2.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.alibaba:fastjson:1.2.32" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.httpcomponents:httpclient:4.5.1" level="project" />
