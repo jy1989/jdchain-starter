@@ -40,13 +40,28 @@ public class AssetContract4 implements EventProcessingAwire {
         eventContext.getLedger().dataAccount(dataAccount.getAddress()).
                 set("param3","参数3的val".getBytes(),-1);
         eventContext.getLedger().dataAccount(dataAccount.getAddress()).
-                set("param4","{'a':'aVal','b':'bVal'}".getBytes(),-1);
+                set("param4","'{'a':'aVal','b':'bVal'}'".getBytes(),-1);
         eventContext.getLedger().dataAccount(dataAccount.getAddress()).
-				set("param5","{'a':'aVal','b':'bVal'}",-1);
+				set("param5","'{'a':'aVal','b':'bVal'}'",-1);
 		eventContext.getLedger().dataAccount(dataAccount.getAddress()).
 				set("param6",123456798,-1);
 		eventContext.getLedger().dataAccount(dataAccount.getAddress()).
-				set("param7","这Y的不是json",-1);
+				set("param7","这不是json",-1);
+		eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+				set("param8","这也不是json",-1);
+		eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+				set("param9","{\"a\":10,\"b\":\"这是一个真正的json\"}",-1);
+		eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+				set("param10","{\"a\":10,\"b\":22}",-1);
+		eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+				set("param11","{\"a\":10,\"b\":\"测试跨页问题\"}",-1);
+		eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+				set("param12","{\"a\":10,\"b\":\"测试跨页问题\"}",-1);
+		eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+				set("param13","{\"a\":10,\"b\":\"测试跨页问题\"}",-1);
+		eventContext.getLedger().dataAccount(dataAccount.getAddress()).
+				set("param14","{\"a\":10,\"b\":\"测试跨页问题\"}",-1);
+
 		System.out.println("data address="+dataAccount.getAddress());
 	}
 
