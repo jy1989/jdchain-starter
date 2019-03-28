@@ -361,7 +361,7 @@ contractArgs=10##4##abc
 
 ##### 3.3.2.	发布和执行合约
 
-运行IntegrationTest.java中的如下方法来发布和执行合约：
+运行jdchain-starter/src/test/…/IntegrationTest.java中的如下方法来发布和执行合约：
 ```
 one_deploy_exe_contract_on_test_gateway()
 ```
