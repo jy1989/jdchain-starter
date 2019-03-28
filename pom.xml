@@ -84,23 +84,23 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>com.jd.blockchain</groupId>
-                <artifactId>contract-maven-plugin</artifactId>
-                <version>${contract.version}</version>
-                <configuration>
-                    <config>E:\gitCode\block\jdchain-starter\src\test\resources\sys-contract.properties</config>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>contractDeploy</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>contractDeploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>com.jd.blockchain</groupId>-->
+                <!--<artifactId>contract-maven-plugin</artifactId>-->
+                <!--<version>${contract.version}</version>-->
+                <!--<configuration>-->
+                    <!--<config>E:\gitCode\block\jdchain-starter\src\test\resources\sys-contract.properties</config>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>contractDeploy</id>-->
+                        <!--<phase>compile</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>contractDeploy</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 
