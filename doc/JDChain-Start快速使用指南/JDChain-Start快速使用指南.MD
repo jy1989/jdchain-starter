@@ -13,7 +13,7 @@
 <dependency>
     <groupId>com.jd.blockchain</groupId>
     <artifactId>sdk-client</artifactId>
-    <version>0.8.2.RELEASE</version>
+    <version>0.8.3.RELEASE</version>
 </dependency>
 ```
 
@@ -23,7 +23,7 @@
 <dependency>
 	<groupId>com.jd.blockchain</groupId>
 	<artifactId>contract-model</artifactId>
-	<version>0.8.2.RELEASE</version>
+	<version>0.8.3.RELEASE</version>
 </dependency>
 ```
 
