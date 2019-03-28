@@ -169,15 +169,8 @@ BlockchainAccount holderAccount = eventContext.getLedger().getAccount(currentLed
 
 ![发布](deploy.png)
 
-
-
-运行IntegrationTest.java中的
-```
-one_deploy_exe_contract_on_test_gateway()
-```
-方法来发布和执行合约，在执行之前，需要配置好测试资源中的sys-contract.properties文件。
-
 ##### 3.3.1.	sys-contract.properties
+配置测试资源中的sys-contract.properties文件：
 
 ```properties
 #常规使用;
@@ -195,8 +188,14 @@ contractArgs=10##4##abc
 
 ```
 
-##### 3.3.2.	发布和执行方法
+##### 3.3.2.	发布和执行合约
 
+运行IntegrationTest.java中的如下方法来发布和执行合约：
+```
+one_deploy_exe_contract_on_test_gateway()
+```
+
+具体代码如下：
 ```java
 /**
  * 在测试链上仅发布和执行合约;
