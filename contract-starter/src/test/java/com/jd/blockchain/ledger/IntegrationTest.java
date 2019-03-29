@@ -200,7 +200,6 @@ public class IntegrationTest extends BaseTest{
         assertTrue(transactionResponse.isSuccess());
     }
 
-
     @Test
     public void query_Test() {
         LedgerInfo ledgerInfo = bcsrv.getLedger(ledgerHash);

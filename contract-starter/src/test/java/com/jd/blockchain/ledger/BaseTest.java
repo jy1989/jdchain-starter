@@ -5,15 +5,11 @@ import com.jd.blockchain.contract.ContractConfigure;
 import com.jd.blockchain.contract.model.ContractDeployExeUtil;
 import com.jd.blockchain.crypto.asymmetric.PrivKey;
 import com.jd.blockchain.crypto.asymmetric.PubKey;
-import com.jd.blockchain.crypto.asymmetric.SignatureDigest;
 import com.jd.blockchain.crypto.hash.HashDigest;
 import com.jd.blockchain.sdk.BlockchainService;
 import com.jd.blockchain.tools.keygen.KeyGenCommand;
-import com.jd.blockchain.utils.Bytes;
 import com.jd.blockchain.utils.codec.Base58Utils;
 import com.jd.blockchain.utils.io.FileUtils;
-import com.jd.blockchain.utils.serialize.json.JSONSerializeUtils;
-import com.jd.blockchain.web.serializes.ByteArrayObjectJsonDeserializer;
 import com.jd.blockchain.web.serializes.ByteArrayObjectUtil;
 import org.junit.Before;
 

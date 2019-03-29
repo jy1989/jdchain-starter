@@ -10,7 +10,7 @@
     1.2.1 在模块contract-compile中package：com.jd.blockchain.contract下编写合约;
     1.2.2 命令行中执行：mvn clean package ，会在/target中生成相应的合约;
     1.2.3 修改sys-contract.properties文件中合约相关部分;
-    1.2.4 执行单元测试IntegrationTest，对应方法如下：
+    1.2.4 执行单元测试contract-starter/src/test/.../IntegrationTest，对应方法如下：
         + one_deploy_exe_contract_on_test_gateway; //通过网关发布和部署合约
         + one_deploy_exeContract_registerDataAccount_on_test_gateway; //通过网关发布和部署合约+添加数据集;
 

@@ -1,5 +1,4 @@
 package com.jd.blockchain.ledger;
-
 import com.jd.blockchain.ledger.domain.ProductInfo;
 import com.jd.blockchain.ledger.domain.TraceInfo;
 import com.jd.blockchain.utils.serialize.json.JSONSerializeUtils;
@@ -13,6 +12,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * @Author zhaogw
- * @Date 2018/12/4 14:11
+ * date 2018/12/4 14:11
  */
 public class TracingTest extends BaseTest{
     CloseableHttpClient httpclient = HttpClients.createDefault();;
