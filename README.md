@@ -2,9 +2,10 @@ jdchain快速上手
 ====
 If you have any questions about this project, please contact us。Any question is welcome.  
 The group mail: [jdchain-support@jd.com](jdchain-support@jd.com)
-
-为方便使用，主目录只保留相关使用文档，具体内容参见各个分支。  
+ 
 如果您对快速上手应用有更好的建议，欢迎给我们发邮件。用户用得好才是真的好。
+
+master与最新的release分支保持一致。其它分支打tag。
 
 #修改说明：
 ## 1.版本1.0.0.RELEASE说明  

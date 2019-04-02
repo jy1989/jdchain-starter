@@ -3,7 +3,6 @@ package com.jd.blockchain.ledger;
 import com.jd.blockchain.contract.model.ContractDeployExeUtil;
 import org.junit.Assert;
 import org.junit.Test;
-
 import static org.junit.Assert.assertTrue;
 
 /**
