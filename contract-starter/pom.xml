@@ -5,13 +5,81 @@
     <parent>
         <artifactId>jdchain-starter</artifactId>
         <groupId>com.jd.blockchain</groupId>
-        <version>1.0.1.RELEASE</version>
+        <version>1.0.3.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>contract-starter</artifactId>
 
     <name>contract-starter</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jd.blockchain</groupId>
+            <artifactId>contract-compile</artifactId>
+            <version>1.0.3.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jd.blockchain</groupId>
+            <artifactId>sdk-client</artifactId>
+            <version>${ledger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jd.blockchain</groupId>
+            <artifactId>ledger-model</artifactId>
+            <version>${ledger.version}</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.jd.blockchain</groupId>-->
+            <!--<artifactId>tools-initializer</artifactId>-->
+            <!--<version>${ledger.version}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jd.blockchain</groupId>
+            <artifactId>tools-keygen</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jd.blockchain</groupId>
+            <artifactId>crypto-classic</artifactId>
+            <version>${ledger.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jd.blockchain</groupId>
+            <artifactId>crypto-sm</artifactId>
+            <version>${ledger.version}</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.jd.blockchain</groupId>-->
+            <!--<artifactId>tools-initializer</artifactId>-->
+            <!--<version>${ledger.version}</version>-->
+        <!--</dependency>-->
+
+    </dependencies>
 
     <properties>
     </properties>

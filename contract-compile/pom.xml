@@ -5,11 +5,20 @@
     <parent>
         <artifactId>jdchain-starter</artifactId>
         <groupId>com.jd.blockchain</groupId>
-        <version>1.0.1.RELEASE</version>
+        <version>1.0.3.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>contract-compile</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jd.blockchain</groupId>
+            <artifactId>ledger-model</artifactId>
+            <version>${ledger.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -47,7 +56,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>com.jd.blockchain.contract.AssetContractImpl1</mainClass>
+                            <mainClass>com.jd.blockchain.contract.TransferContractImpl</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -78,7 +87,7 @@
                         <id>make-assembly</id>
                         <phase>process-sources</phase>
                         <goals>
-                            <goal>checkImports</goal>
+                            <!--<goal>checkImports</goal>-->
                         </goals>
                     </execution>
                 </executions>
