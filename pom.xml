@@ -28,18 +28,8 @@
         <dependencies>
             <dependency>
                 <groupId>com.jd.blockchain</groupId>
-                <artifactId>sdk-client</artifactId>
-                <version>${ledger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.jd.blockchain</groupId>
-                <artifactId>ledger-model</artifactId>
-                <version>${ledger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.jd.blockchain</groupId>
-                <artifactId>tools-keygen</artifactId>
-                <version>${ledger.version}</version>
+                <artifactId>sdk-pack</artifactId>
+                <version>1.0.0.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -47,17 +37,10 @@
                 <version>4.12</version>
                 <scope>test</scope>
             </dependency>
-
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>${httpclient.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
