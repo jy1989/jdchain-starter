@@ -13,7 +13,7 @@
 <dependency>
     <groupId>com.jd.blockchain</groupId>
     <artifactId>sdk-client</artifactId>
-    <version>0.8.3.RELEASE</version>
+    <version>1.0.0.RELEASE</version>
 </dependency>
 ```
 
@@ -22,8 +22,8 @@
 ```java
 <dependency>
 	<groupId>com.jd.blockchain</groupId>
-	<artifactId>contract-model</artifactId>
-	<version>0.8.3.RELEASE</version>
+	<artifactId>sdk-pack</artifactId>
+	<version>1.0.0.RELEASE</version>
 </dependency>
 ```
 
@@ -259,7 +259,6 @@
 #### 2.7. 合约执行
 
 ```java
-
     // 创建服务代理；
     BlockchainService service = serviceFactory.getBlockchainService();
 
@@ -268,30 +267,31 @@
 
     // 合约地址
     String contractAddressBase58 = "";
-
-    // Event
-    String event = "";
-
-    // args（注意参数的格式）
-    byte[] args = "20##30##abc".getBytes();
-
-
-    // 提交合约执行代码
-    txTemp.contractEvents().send(contractAddressBase58, event, args);
-
-    // TX 准备就绪；
-    PreparedTransaction prepTx = txTemp.prepare();
-
-    // 生成私钥并使用私钥进行签名；
-    CryptoKeyPair keyPair = getSponsorKey();
-
-    prepTx.sign(keyPair);
-
-    // 提交交易；
-    TransactionResponse transactionResponse = prepTx.commit();
-
-    assertTrue(transactionResponse.isSuccess());
-
+    
+    // 使用接口方式调用合约
+    TransferContract transferContract = txTpl.contract(contractAddress, TransferContract.class);
+    
+    // 使用decode方式调用合约内部方法（create方法）
+    // 返回GenericValueHolder可通过get方法获取结果，但get方法需要在commit调用后执行
+    GenericValueHolder<String> result = ContractReturnValue.decode(transferContract.create(address, account, money));
+    
+    PreparedTransaction ptx = txTpl.prepare();
+    
+    ptx.sign(adminKey);
+    
+    TransactionResponse transactionResponse = ptx.commit();
+    
+    String cotractExecResult = result.get();
+    
+    // TransactionResponse也提供了可供查询结果的接口
+    OperationResult[] operationResults = transactionResponse.getOperationResults();
+    
+    // 通过OperationResult获取结果
+    for (int i = 0; i < operationResults.length; i++) {
+        OperationResult opResult = operationResults[i];
+        System.out.printf("Operation[%s].result = %s \r\n", 
+                opResult.getIndex(), BytesValueEncoding.decode(opResult.getResult()));
+    }
 ```
 
 ### 3. 快速开发合约代码
@@ -333,77 +333,25 @@ BlockchainAccount holderAccount = eventContext.getLedger().getAccount(currentLed
 
 ```
 
-#### 3.3.	发布
-编译完成之后，根据如上的配置，会在target目录下生成对应的合约压缩文件：contract.jar。
-
-
+#### 3.3.	发布与执行
+编译完成之后，根据如上的配置，会在target目录下生成对应的合约压缩文件：contract.jar。  
+将此contract.jar复制至contract-starter模块中src/resources目录下。
 
 ![发布](deploy.png)
 
-##### 3.3.1.	sys-contract.properties
-配置测试资源中的sys-contract.properties文件：
+执行contract-starter/src/.../SDK_Contract_Demo.java类中的main()方法：
 
-```properties
-#常规使用;
-ownerPubPath=xxx/conf/jd-com.pub
-ownerPrvPath=xxx/conf/jd-com.priv
-ownerPassword=xxx/conf/ownerPassword.txt
-ledgerHash=6Gw3cK4uazegy4HjoaM81ck9NgYLNoKyBMb7a1TK1jt3d
-
-host=192.168.151.45
-port=8081
-#合约使用如下;
-event = issue-asset
-chainCodePath=xxx/AssetContract3.contract
-contractArgs=10##4##abc
-
-```
-
-##### 3.3.2.	发布和执行合约
-
-运行contract-starter/src/test/…/IntegrationTest.java中的如下方法来发布和执行合约：
-```
-one_deploy_exe_contract_on_test_gateway()
-```
-
-具体代码如下：
 ```java
-/**
- * 在测试链上仅发布和执行合约;
- */
-private void deploy_exe_contract_on_test_gateway(){
-	//then exe the contract;
-	//由于合约发布之后需要后台进行共识处理，需要一定的时间消耗，先休息1秒钟之后再执行;
-	try {
-		Thread.sleep(1000L);
-		boolean deployResult = ContractDeployExeUtil.instance.deploy(host, port, ledger,ownerPubPath, ownerPrvPath, ownerPassword, chainCodePath,contractPub);
-		System.out.println("deployResult="+deployResult);
-		Thread.sleep(2000L);
-		boolean exeResult = false;
-		exeResult = ContractDeployExeUtil.instance.exeContract(ledger,ownerPubPath, ownerPrvPath, ownerPassword,eventName,contractArgs);
-		System.out.println("execute the contract,result= "+exeResult);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
+public class SDK_Contract_Demo extends SDK_Base_Demo {
+	public static void main(String[] args) {
+		new SDK_Contract_Demo().executeContract();
 	}
 }
 ```
 
-```java
-// 发布完成之后，会在控制台中生成如下信息：
-contract's address=5SmDBPXfXoSsJmfJskkpeVbZkxfkawqWE9CE
-deployResult=true
-```
-
-#### 3.4.	执行
-执行即如上的方法：
-
-```java
-ContractDeployExeUtil.instance.exeContract(ledger,ownerPubPath, ownerPrvPath, ownerPassword,eventName,contractArgs);
-```
-
 在执行完成之后，可以在api接口中查询相关的信息。
 
-##### 3.4.1.	根据合约地址查询
+##### 3.3.1.	根据合约地址查询
 http://192.168.151.45:7080/ledgers/6Gw3cK4uazegy4HjoaM81ck9NgYLNoKyBMb7a1TK1jt3d/contracts/5SmDBPXfXoSsJmfJskkpeVbZkxfkawqWE9CE
 
 结果：
