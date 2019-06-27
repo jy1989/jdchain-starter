@@ -11,6 +11,11 @@
 
     <artifactId>contract-compile</artifactId>
 
+    <properties>
+        <mainClass>com.jd.blockchain.contract.TransferContractImpl</mainClass>
+        <mvnHome>E:\apache-maven-3.5.0\</mvnHome>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.jd.blockchain</groupId>
@@ -77,16 +82,18 @@
                 <groupId>com.jd.blockchain</groupId>
                 <artifactId>contract-maven-plugin</artifactId>
                 <version>${contract.version}</version>
-                <!--<version>0.8.2-SNAPSHOT</version>-->
-                <!--<configuration>-->
-                    <!--<config>${project.basedir}/src/main/resources/config.properties</config>-->
-                <!--</configuration>-->
+                <configuration>
+                    <finalName>contract</finalName>
+                    <mainClass>${mainClass}</mainClass>
+                    <ledgerVersion>${ledger.version}</ledgerVersion>
+                    <mvnHome>${mvnHome}</mvnHome>
+                </configuration>
                 <executions>
                     <execution>
                         <id>make-assembly</id>
                         <phase>process-sources</phase>
                         <goals>
-                            <!--<goal>checkImports</goal>-->
+                            <goal>contractCheck</goal>
                         </goals>
                     </execution>
                 </executions>
