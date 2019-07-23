@@ -14,8 +14,8 @@
     </modules>
 
     <properties>
-        <contract.version>1.0.0.RELEASE</contract.version>
-        <ledger.version>1.0.0.RELEASE</ledger.version>
+        <contract.version>1.0.1.RELEASE</contract.version>
+        <ledger.version>1.0.1.RELEASE</ledger.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <log4j.version>2.11.1</log4j.version>
         <slf4j.version>1.7.25</slf4j.version>
@@ -29,7 +29,7 @@
             <dependency>
                 <groupId>com.jd.blockchain</groupId>
                 <artifactId>sdk-pack</artifactId>
-                <version>1.0.0.RELEASE</version>
+                <version>${contract.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
