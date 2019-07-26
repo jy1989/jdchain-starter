@@ -1,13 +1,11 @@
 package com.jd.blockchain.contract;
 
-import com.jd.blockchain.crypto.*;
-import com.jd.blockchain.ledger.BlockchainKeyGenerator;
+import com.jd.blockchain.crypto.AsymmetricKeypair;
+import com.jd.blockchain.crypto.Crypto;
+import com.jd.blockchain.crypto.SignatureFunction;
 import com.jd.blockchain.ledger.BlockchainKeypair;
 import com.jd.blockchain.ledger.PreparedTransaction;
 import com.jd.blockchain.ledger.TransactionTemplate;
-import com.jd.blockchain.sdk.BlockchainTransactionService;
-import com.jd.blockchain.sdk.client.GatewayServiceFactory;
-import com.jd.blockchain.utils.net.NetworkAddress;
 
 public class SDKDemo_User extends SDK_Base_Demo{
 
