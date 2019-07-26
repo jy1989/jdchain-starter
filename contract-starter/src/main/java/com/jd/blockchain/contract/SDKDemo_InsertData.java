@@ -26,7 +26,7 @@ public class SDKDemo_InsertData extends SDK_Base_Demo{
 		txTemp.dataAccounts().register(dataAccount.getIdentity());
 		txTemp.dataAccount(dataAccount.getAddress()).setText("key1","value1",-1);
 
-		// TX 准备就绪；
+		// TX 准备就绪
 		PreparedTransaction prepTx = txTemp.prepare();
 		prepTx.sign(adminKey);
 
