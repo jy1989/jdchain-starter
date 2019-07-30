@@ -52,6 +52,7 @@ public class SDKDemo_InsertData extends SDK_Base_Demo{
 			Operation[] operations = txContent.getOperations();
 			if (operations != null && operations.length > 0) {
 				for (Operation operation : operations) {
+					operation = ClientResolveUtil.read(operation);
 					// 操作类型：数据账户注册操作
 					if (operation instanceof  DataAccountRegisterOperation) {
 						DataAccountRegisterOperation daro = (DataAccountRegisterOperation) operation;
