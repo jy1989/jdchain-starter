@@ -3,6 +3,7 @@ package com.jd.blockchain.contract;
 import com.jd.blockchain.crypto.AsymmetricKeypair;
 import com.jd.blockchain.crypto.Crypto;
 import com.jd.blockchain.crypto.SignatureFunction;
+import com.jd.blockchain.ledger.BlockchainKeyGenerator;
 import com.jd.blockchain.ledger.BlockchainKeypair;
 import com.jd.blockchain.ledger.PreparedTransaction;
 import com.jd.blockchain.ledger.TransactionTemplate;
@@ -19,9 +20,12 @@ public class SDKDemo_User extends SDK_Base_Demo{
 	public void registerUser() {
 		// 在本地定义注册账号的 TX；
 		TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
-		SignatureFunction signatureFunction = Crypto.getSignatureFunction("ED25519");
-		AsymmetricKeypair cryptoKeyPair = signatureFunction.generateKeypair();
-		BlockchainKeypair user = new BlockchainKeypair(cryptoKeyPair.getPubKey(), cryptoKeyPair.getPrivKey());
+		//采用原始的方式来生成BlockchainKeypair;
+//		SignatureFunction signatureFunction = Crypto.getSignatureFunction("ED25519");
+//		AsymmetricKeypair cryptoKeyPair = signatureFunction.generateKeypair();
+//		BlockchainKeypair user = new BlockchainKeypair(cryptoKeyPair.getPubKey(), cryptoKeyPair.getPrivKey());
+		//采用KeyGenerator来生成BlockchainKeypair;
+		BlockchainKeypair user = BlockchainKeyGenerator.getInstance().generate();
 
 		txTemp.users().register(user.getIdentity());
 
