@@ -13,7 +13,7 @@
 
     <properties>
         <mainClass>com.jd.blockchain.contract.TransferContractImpl</mainClass>
-        <mvnHome>E:\apache-maven-3.5.0\</mvnHome>
+        <!--<mvnHome>E:\apache-maven-3.5.0\</mvnHome>-->
     </properties>
 
     <dependencies>
@@ -78,26 +78,52 @@
                 </executions>
             </plugin>
 
+            <!--<plugin>-->
+                <!--<groupId>com.jd.blockchain</groupId>-->
+                <!--<artifactId>contract-maven-plugin</artifactId>-->
+                <!--<version>${contract.version}</version>-->
+                <!--<configuration>-->
+                    <!--<finalName>contract</finalName>-->
+                    <!--<mainClass>${mainClass}</mainClass>-->
+                    <!--<ledgerVersion>${ledger.version}</ledgerVersion>-->
+                    <!--&lt;!&ndash;<mvnHome>${mvnHome}</mvnHome>&ndash;&gt;-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>make-assembly</id>-->
+                        <!--<phase>process-sources</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>contractCheck</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+
             <plugin>
-                <groupId>com.jd.blockchain</groupId>
-                <artifactId>contract-maven-plugin</artifactId>
-                <version>${contract.version}</version>
-                <configuration>
-                    <finalName>contract</finalName>
-                    <mainClass>${mainClass}</mainClass>
-                    <ledgerVersion>${ledger.version}</ledgerVersion>
-                    <mvnHome>${mvnHome}</mvnHome>
-                </configuration>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
                         <id>make-assembly</id>
-                        <phase>process-sources</phase>
+                        <phase>package</phase>
                         <goals>
-                            <goal>contractCheck</goal>
+                            <goal>single</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <finalName>contract</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <archive>
+                        <manifest>
+                            <mainClass>${mainClass}</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.0.2</version>
