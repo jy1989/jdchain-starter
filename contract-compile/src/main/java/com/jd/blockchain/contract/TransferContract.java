@@ -14,4 +14,7 @@ public interface TransferContract {
 
     @ContractEvent(name = "readAll")
     String readAll(String address, String account);
+
+    @ContractEvent(name = "factor")
+    String factor(String address, String accountOne, String accountTwo, String objectJson);
 }

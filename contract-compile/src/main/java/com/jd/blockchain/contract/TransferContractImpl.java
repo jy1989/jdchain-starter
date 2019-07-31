@@ -106,4 +106,27 @@ public class TransferContractImpl implements EventProcessingAware, TransferContr
     public void postEvent(ContractEventContext eventContext, Exception error) {
 
     }
+
+    @Override
+    public String factor(String address, String accountOne, String accountTwo, String objectJson) {
+        KVDataEntry[] entriesOne = eventContext.getLedger().getDataEntries(ledgerHash, address, accountOne);
+        KVDataEntry[] entriesTwo = eventContext.getLedger().getDataEntries(ledgerHash, address, accountTwo);
+        // 肯定有返回值，但若不存在则返回version=-1
+        if (entriesOne != null && entriesOne.length > 0 && entriesTwo != null && entriesTwo.length > 0) {
+            long currVersionOne = entriesOne[0].getVersion();
+            if (currVersionOne > -1) {
+                throw new IllegalStateException(String.format("%s -> %s already have created !!!", address, accountOne));
+            }
+            long currVersionTwo = entriesTwo[0].getVersion();
+            if (currVersionTwo > -1) {
+                throw new IllegalStateException(String.format("%s -> %s already have created !!!", address, accountTwo));
+            }
+            //eventContext.getLedger().dataAccount(address).setJSONFactor(accountOne, accountTwo, objectJson);
+            eventContext.getLedger().dataAccount(address).setText(accountOne, objectJson, -1L);
+        } else {
+            throw new IllegalStateException(String.format("Ledger[%s] inner Error !!!", ledgerHash.toBase58()));
+        }
+        return String.format("DataAccountAddress[%s] -> Create(By Contract Operation) AccountOne = %s and AccountOne = %s and Money = %s Success!!! \r\n",
+                address, accountOne, accountTwo, objectJson);
+    }
 }
