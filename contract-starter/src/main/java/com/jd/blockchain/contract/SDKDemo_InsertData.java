@@ -26,6 +26,7 @@ public class SDKDemo_InsertData extends SDK_Base_Demo{
 		txTemp.dataAccounts().register(dataAccount.getIdentity());
 		txTemp.dataAccount(dataAccount.getAddress()).setText("key1","value1",-1);
 		//add some data for retrieve;
+		System.out.println("current dataAccount="+dataAccount.getAddress());
 		txTemp.dataAccount(dataAccount.getAddress()).setText("cc-fin01-01","{\"dest\":\"KA001\",\"id\":\"cc-fin01-01\",\"items\":\"FIN001|5000\",\"source\":\"FIN001\"}",-1);
 		txTemp.dataAccount(dataAccount.getAddress()).setText("cc-fin02-01","{\"dest\":\"KA001\",\"id\":\"cc-fin02-01\",\"items\":\"FIN002|2000\",\"source\":\"FIN002\"}",-1);
 
