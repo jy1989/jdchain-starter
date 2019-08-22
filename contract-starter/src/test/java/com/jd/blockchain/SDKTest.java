@@ -1,0 +1,191 @@
+package com.jd.blockchain;
+
+import com.jd.blockchain.contract.SDK_Base_Demo;
+import com.jd.blockchain.crypto.HashDigest;
+import com.jd.blockchain.ledger.*;
+import com.jd.blockchain.sdk.converters.ClientResolveUtil;
+import org.junit.Test;
+
+/**
+ * @author zhaogw
+ * date 2019/8/8 10:43
+ */
+public class SDKTest extends SDK_Base_Demo {
+    //because it need to connect the web, so make the switch;
+    private boolean isTest = true;
+    private String strDataAccount;
+
+    @Test
+    public void checkXml_existDataAcount(){
+        if(!isTest) return;
+        insertData();
+        TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
+
+        //add some data for retrieve;
+        System.out.println("current dataAccount="+this.strDataAccount);
+        txTemp.dataAccount(this.strDataAccount).setText("textKey","{\"dest\":\"KA001\",\"id\":\"cc-fin01-01\",\"items\":\"FIN001|5000\",\"source\":\"FIN001\"}",-1);
+        txTemp.dataAccount(this.strDataAccount).setXML("xmlKey","<person>\n" +
+                "    <age value=\"too young\" />\n" +
+                "    <experience value=\"too simple\" />\n" +
+                "    <result value=\"sometimes naive\" />\n" +
+                "</person>",-1);
+
+        // TX 准备就绪
+        PreparedTransaction prepTx = txTemp.prepare();
+        prepTx.sign(adminKey);
+
+        // 提交交易；
+        prepTx.commit();
+
+        getData(strDataAccount);
+    }
+
+    /**
+     * 生成一个区块链数据账户，并注册到区块链；
+     */
+    @Test
+    public void insertData() {
+        if(!isTest) return;
+        // 在本地定义注册账号的 TX；
+        TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
+        //采用KeyGenerator来生成BlockchainKeypair;
+        BlockchainKeypair dataAccount = BlockchainKeyGenerator.getInstance().generate();
+
+        txTemp.dataAccounts().register(dataAccount.getIdentity());
+        txTemp.dataAccount(dataAccount.getAddress()).setText("key1","value1",-1);
+        //add some data for retrieve;
+        this.strDataAccount = dataAccount.getAddress().toBase58();
+        System.out.println("current dataAccount="+dataAccount.getAddress());
+//        txTemp.dataAccount(dataAccount.getAddress()).setText("cc-fin01-01","{\"dest\":\"KA001\",\"id\":\"cc-fin01-01\",\"items\":\"FIN001|5000\",\"source\":\"FIN001\"}",-1);
+//        txTemp.dataAccount(dataAccount.getAddress()).setText("cc-fin02-01","{\"dest\":\"KA001\",\"id\":\"cc-fin02-01\",\"items\":\"FIN002|2000\",\"source\":\"FIN002\"}",-1);
+
+        // TX 准备就绪
+        PreparedTransaction prepTx = txTemp.prepare();
+        prepTx.sign(adminKey);
+
+        // 提交交易；
+        prepTx.commit();
+
+        getData(dataAccount.getAddress().toBase58());
+    }
+
+    /**
+     * 根据已有的数据账户地址，添加数据;
+     */
+    @Test
+    public void inserDataByExisDataAccount(){
+        if(!isTest) return;
+        this.strDataAccount = "LdeNfJro5ehPFeWVjcaoVPTm7C9cFxBogMWBB";
+        TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
+
+        //add some data for retrieve;
+        System.out.println("current dataAccount="+this.strDataAccount);
+        txTemp.dataAccount(this.strDataAccount).setText("cc-fin01-01",
+                "{\"dest\":\"KA001\",\"id\":\"cc-fin01-01\",\"items\":\"FIN001|5000\",\"source\":\"FIN001\"}",-1);
+        txTemp.dataAccount(this.strDataAccount).setText("cc-fin02-01",
+                "{\"dest\":\"KA001\",\"id\":\"cc-fin02-01\",\"items\":\"FIN002|2000\",\"source\":\"FIN002\"}",-1);
+        txTemp.dataAccount(this.strDataAccount).setText("cc-fin03-01",
+                "{\"dest\":\"KA001\",\"id\":\"cc-fin03-01\",\"items\":\"FIN001|5000\",\"source\":\"FIN003\"}",-1);
+        txTemp.dataAccount(this.strDataAccount).setText("cc-fin04-01",
+                "{\"dest\":\"KA002\",\"id\":\"cc-fin04-01\",\"items\":\"FIN003|3000\",\"source\":\"FIN002\"}",-1);
+        txTemp.dataAccount(this.strDataAccount).setText("cc-fin05-01",
+                "{\"dest\":\"KA003\",\"id\":\"cc-fin05-01\",\"items\":\"FIN001|5000\",\"source\":\"FIN001\"}",-1);
+        txTemp.dataAccount(this.strDataAccount).setText("cc-fin06-01",
+                "{\"dest\":\"KA004\",\"id\":\"cc-fin06-01\",\"items\":\"FIN002|2020\",\"source\":\"FIN001\"}",-1);
+        txTemp.dataAccount(this.strDataAccount).setText("cc-fin07-01",
+                "{\"dest\":\"KA005\",\"id\":\"cc-fin07-01\",\"items\":\"FIN001|5010\",\"source\":\"FIN001\"}",-1);
+        txTemp.dataAccount(this.strDataAccount).setText("cc-fin08-01",
+                "{\"dest\":\"KA006\",\"id\":\"cc-fin08-01\",\"items\":\"FIN001|3030\",\"source\":\"FIN001\"}",-1);
+
+        // TX 准备就绪
+        PreparedTransaction prepTx = txTemp.prepare();
+        prepTx.sign(adminKey);
+
+        // 提交交易；
+        prepTx.commit();
+
+        getData(strDataAccount);
+    }
+
+    public void getData(String commerceAccount) {
+        // 查询区块信息；
+        // 区块高度；
+        long ledgerNumber = blockchainService.getLedger(ledgerHash).getLatestBlockHeight();
+        // 最新区块；
+        LedgerBlock latestBlock = blockchainService.getBlock(ledgerHash, ledgerNumber);
+        // 区块中的交易的数量；
+        long txCount = blockchainService.getTransactionCount(ledgerHash, latestBlock.getHash());
+        // 获取交易列表；
+        LedgerTransaction[] txList = blockchainService.getTransactions(ledgerHash, ledgerNumber, 0, 100);
+        // 遍历交易列表
+        for (LedgerTransaction ledgerTransaction : txList) {
+            TransactionContent txContent = ledgerTransaction.getTransactionContent();
+            Operation[] operations = txContent.getOperations();
+            if (operations != null && operations.length > 0) {
+                for (Operation operation : operations) {
+                    operation = ClientResolveUtil.read(operation);
+                    // 操作类型：数据账户注册操作
+                    if (operation instanceof  DataAccountRegisterOperation) {
+                        DataAccountRegisterOperation daro = (DataAccountRegisterOperation) operation;
+                        BlockchainIdentity blockchainIdentity = daro.getAccountID();
+                    }
+                    // 操作类型：用户注册操作
+                    else if (operation instanceof UserRegisterOperation) {
+                        UserRegisterOperation uro = (UserRegisterOperation) operation;
+                        BlockchainIdentity blockchainIdentity = uro.getUserID();
+                    }
+                    // 操作类型：账本注册操作
+                    else if (operation instanceof LedgerInitOperation) {
+
+                        LedgerInitOperation ledgerInitOperation = (LedgerInitOperation)operation;
+                        LedgerInitSetting ledgerInitSetting = ledgerInitOperation.getInitSetting();
+
+                        ParticipantNode[] participantNodes = ledgerInitSetting.getConsensusParticipants();
+                    }
+                    // 操作类型：合约发布操作
+                    else if (operation instanceof ContractCodeDeployOperation) {
+                        ContractCodeDeployOperation ccdo = (ContractCodeDeployOperation) operation;
+                        BlockchainIdentity blockchainIdentity = ccdo.getContractID();
+                    }
+                    // 操作类型：合约执行操作
+                    else if (operation instanceof ContractEventSendOperation) {
+                        ContractEventSendOperation ceso = (ContractEventSendOperation) operation;
+                    }
+                    // 操作类型：KV存储操作
+                    else if (operation instanceof DataAccountKVSetOperation) {
+                        DataAccountKVSetOperation.KVWriteEntry[] kvWriteEntries =
+                                ((DataAccountKVSetOperation) operation).getWriteSet();
+                        if (kvWriteEntries != null && kvWriteEntries.length > 0) {
+                            for (DataAccountKVSetOperation.KVWriteEntry kvWriteEntry : kvWriteEntries) {
+                                BytesValue bytesValue = kvWriteEntry.getValue();
+                                DataType dataType = bytesValue.getType();
+                                Object showVal = ClientResolveUtil.readValueByBytesValue(bytesValue);
+                                System.out.println("writeSet.key=" + kvWriteEntry.getKey());
+                                System.out.println("writeSet.value=" + showVal);
+                                System.out.println("writeSet.type=" + dataType);
+                                System.out.println("writeSet.version=" + kvWriteEntry.getExpectedVersion());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //根据交易的 hash 获得交易；注：客户端生成 PrepareTransaction 时得到交易hash；
+        HashDigest txHash = txList[0].getTransactionContent().getHash();
+//		Transaction tx = blockchainService.getTransactionByContentHash(ledgerHash, txHash);
+//		String[] objKeys = new String[] { "x001", "x002" };
+//		KVDataEntry[] kvData = blockchainService.getDataEntries(ledgerHash, commerceAccount, objKeys);
+
+        // 获取数据账户下所有的KV列表
+        KVDataEntry[] kvData = blockchainService.getDataEntries(ledgerHash, commerceAccount, 0, 100);
+        if (kvData != null && kvData.length > 0) {
+            for (KVDataEntry kvDatum : kvData) {
+                System.out.println("kvData.key=" + kvDatum.getKey());
+                System.out.println("kvData.version=" + kvDatum.getVersion());
+                System.out.println("kvData.type=" + kvDatum.getType());
+                System.out.println("kvData.value=" + kvDatum.getValue());
+            }
+        }
+    }
+}
