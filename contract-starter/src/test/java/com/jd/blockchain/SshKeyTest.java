@@ -6,15 +6,12 @@ import com.jd.blockchain.crypto.CryptoAlgorithm;
 import com.jd.blockchain.crypto.PrivKey;
 import com.jd.blockchain.crypto.PubKey;
 import com.jd.blockchain.crypto.service.classic.ClassicAlgorithm;
-import com.jd.blockchain.crypto.service.classic.ED25519SignatureFunction;
-import com.jd.blockchain.crypto.utils.classic.ECDSAUtils;
 import com.jd.blockchain.crypto.utils.classic.RSAUtils;
 import com.jd.blockchain.crypto.utils.classic.SSHKeyParser;
 import com.jd.blockchain.ledger.BlockchainKeypair;
 import com.jd.blockchain.ledger.PreparedTransaction;
 import com.jd.blockchain.ledger.TransactionTemplate;
 import org.bouncycastle.crypto.params.*;
-import org.bouncycastle.jcajce.provider.asymmetric.dsa.DSAUtil;
 import org.junit.Before;
 import org.junit.Test;
 
