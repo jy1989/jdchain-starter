@@ -24,5 +24,6 @@ master与最新的release分支保持一致。其它分支打tag。
 2）基于jdchain1.0.0.RELEASE版本给出新的使用样例，本版本基于接口来编程，对合约样例进行了重新梳理，并采用main()函数的方式来执行合约测试用例;  
 3）更新了doc文件夹中的JDChain-Start快速使用指南.md文档；  
 4）清理了原先的readme.txt文档，将其内容合并至"JDChain-Start快速使用指南.md"中；  
-5) 新增了“快速部署JDChain.pdf”文档，方便开发使用；  
+5）新增了“快速部署JDChain.pdf”文档，方便开发使用；   
+6）添加了ssh-keygen的整合单元测试SshKeyTest.java； 
 

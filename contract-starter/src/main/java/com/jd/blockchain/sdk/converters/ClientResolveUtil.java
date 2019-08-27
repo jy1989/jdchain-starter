@@ -50,6 +50,7 @@ public class ClientResolveUtil {
                 case BYTES:
                 case TEXT:
                 case JSON:
+                case XML:
                     innerKvData.setValue(valueObj.toString());
                     break;
                 case INT32:
@@ -108,6 +109,7 @@ public class ClientResolveUtil {
                 break;
             case TEXT:
             case JSON:
+            case XML:
                 showVal = saveVal.toUTF8String();
                 break;
             case INT64:

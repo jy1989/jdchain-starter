@@ -26,6 +26,7 @@ public class SDKDemo_User extends SDK_Base_Demo{
 //		BlockchainKeypair user = new BlockchainKeypair(cryptoKeyPair.getPubKey(), cryptoKeyPair.getPrivKey());
 		//采用KeyGenerator来生成BlockchainKeypair;
 		BlockchainKeypair user = BlockchainKeyGenerator.getInstance().generate();
+		System.out.println("user="+user.getAddress());
 
 		txTemp.users().register(user.getIdentity());
 
