@@ -36,6 +36,11 @@
             <groupId>com.jd.blockchain</groupId>
             <artifactId>sdk-pack</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.jd.blockchain</groupId>
+            <artifactId>crypto-pki</artifactId>
+            <version>${ledger.version}</version>
+        </dependency>
 
     </dependencies>
 
