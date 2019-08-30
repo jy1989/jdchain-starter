@@ -1,5 +1,8 @@
 package com.jd.blockchain.contract;
 
+import com.jd.blockchain.crypto.PrivKey;
+import com.jd.blockchain.crypto.PubKey;
+import com.jd.blockchain.tools.keygen.KeyGenCommand;
 import org.apache.commons.io.FileUtils;
 import org.springframework.core.io.ClassPathResource;
 
@@ -12,18 +15,15 @@ public class SDKDemo_Constant {
     public static final int GW_PORT = 18081;
 
     public static final String[] PUB_KEYS = {
-            "3snPdw7i7PbzpYs5kPQC4txDJGvkGrhSekic1rCmwd2u53ys9NDbu6",
-            "3snPdw7i7PajLB35tEau1kmixc6ZrjLXgxwKbkv5bHhP7nT5dhD9eX",
-            "3snPdw7i7PZi6TStiyc6mzjprnNhgs2atSGNS8wPYzhbKaUWGFJt7x",
-            "3snPdw7i7PifPuRX7fu3jBjsb3rJRfDe9GtbDfvFJaJ4V4hHXQfhwk"};
+            "3snPdw7i7PfAP5uNJoXwN3qzjhcWzec9FvitGn6nL9timnvf7FSQnC"};
 
     public static final String[] PRIV_KEYS = {
-            "177gjyPd3WW3ZiegSJbQaz7a2vaDnYUrBu8EfFksmqtzAhMLYWs63T9xhGHaH2GncCGKfjV",
-            "177gju9p5zrNdHJVEQnEEKF4ZjDDYmAXyfG84V5RPGVc5xFfmtwnHA7j51nyNLUFffzz5UT",
-            "177gjtwLgmSx5v1hFb46ijh7L9kdbKUpJYqdKVf9afiEmAuLgo8Rck9yu5UuUcHknWJuWaF",
-            "177gk1pudweTq5zgJTh8y3ENCTwtSFsKyX7YnpuKPo7rKgCkCBXVXh5z2syaTCPEMbuWRns"};
+            "177gjvnDU2z3D9knsvgE2tp3pRuGG25aiX4E1DdHSzgRXSb8yxnDojLxYixVd8ox9pHguUz"};
 
-    public static final String PASSWORD = "800000";
+    public static final String PASSWORD = "abc";
+
+    public static PrivKey privkey0 = KeyGenCommand.decodePrivKeyWithRawPassword(PRIV_KEYS[0], PASSWORD);
+    public static PubKey pubKey0 = KeyGenCommand.decodePubKey(PUB_KEYS[0]);
 
     public static final byte[] readChainCodes(String contractZip) {
         // 构建合约的字节数组;
