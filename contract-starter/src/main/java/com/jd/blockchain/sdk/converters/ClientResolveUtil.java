@@ -276,6 +276,7 @@ public class ClientResolveUtil {
         private String address;
         private String name;
         private PubKey pubKey;
+        private ParticipantNodeState participantNodeState;
 
         public ParticipantCertData() {
         }
@@ -314,6 +315,11 @@ public class ClientResolveUtil {
 
         public void setId(int id) {
             this.id = id;
+        }
+
+        @Override
+        public ParticipantNodeState getParticipantNodeState() {
+            return participantNodeState;
         }
     }
 
