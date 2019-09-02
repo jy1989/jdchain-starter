@@ -15,10 +15,10 @@ public class SDKDemo_Constant {
     public static final int GW_PORT = 18081;
 
     public static final String[] PUB_KEYS = {
-            "3snPdw7i7PfAP5uNJoXwN3qzjhcWzec9FvitGn6nL9timnvf7FSQnC"};
+            "3snPdw7i7PbUX47tXkHVuRd2mP8mXhEJbaBM441h9wa67TAeMfiqUX"};
 
     public static final String[] PRIV_KEYS = {
-            "177gjvnDU2z3D9knsvgE2tp3pRuGG25aiX4E1DdHSzgRXSb8yxnDojLxYixVd8ox9pHguUz"};
+            "177gjuzAyvF8W2KYST8tVPmvGBsPLhXsf55HpHxSbHF7Va995ekXvxjNimEYNt5wP6GxTpW"};
 
     public static final String PASSWORD = "abc";
 

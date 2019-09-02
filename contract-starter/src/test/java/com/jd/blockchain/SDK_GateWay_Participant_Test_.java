@@ -36,8 +36,8 @@ public class SDK_GateWay_Participant_Test_ {
     private BlockchainService service;
 
     //根据密码工具产生的公私钥
-    static String PUB = "3snPdw7i7PfAP5uNJoXwN3qzjhcWzec9FvitGn6nL9timnvf7FSQnC";
-    String PRIV = "177gjvnDU2z3D9knsvgE2tp3pRuGG25aiX4E1DdHSzgRXSb8yxnDojLxYixVd8ox9pHguUz";
+    static String PUB = "3snPdw7i7Pinj7hxYSsivpbde1YmiuT2QkJoxFmzsfssbvuQxiREhH";
+    String PRIV = "177gjyKEYT9EZe4oQ69hRYkS4YDHFEEfpysK43aJStQRK7mcnnji5xU8f78GukDnTQ9Tz83";
 
     @Before
     public void init() {
@@ -78,9 +78,9 @@ public class SDK_GateWay_Participant_Test_ {
 
         BlockchainKeypair user = new BlockchainKeypair(pubKey, privKey);
 
-        NetworkAddress networkAddress = new NetworkAddress(GATEWAY_IPADDR, 20010);
+        NetworkAddress networkAddress = new NetworkAddress(GATEWAY_IPADDR, 20000);
 
-        ParticipantInfo participantInfo = new ParticipantInfoData("add","6.com", user.getPubKey(), networkAddress);
+        ParticipantInfo participantInfo = new ParticipantInfoData("add","4.com", user.getPubKey(), networkAddress);
 
         // 注册参与方
         txTemp.participants().register(participantInfo);
@@ -95,4 +95,39 @@ public class SDK_GateWay_Participant_Test_ {
         TransactionResponse transactionResponse = prepTx.commit();
         assertTrue(transactionResponse.isSuccess());
     }
+
+    /**
+     * first join the ledger, then handle the init, then update the state;
+     */
+    @Test
+    public void updateParticipantState_Test() {
+        HashDigest[] ledgerHashs = service.getLedgerHashs();
+        // 在本地定义注册账号的 TX；
+        TransactionTemplate txTemp = service.newTransaction(ledgerHashs[0]);
+
+        //existed signer
+        AsymmetricKeypair keyPair = new BlockchainKeypair(pubKey, privKey);
+
+        PrivKey privKey = KeyGenCommand.decodePrivKeyWithRawPassword(PRIV, SDKDemo_Constant.PASSWORD);
+
+        PubKey pubKey = KeyGenCommand.decodePubKey(PUB);
+
+        System.out.println("Address = "+AddressEncoding.generateAddress(pubKey));
+
+
+        ParticipantStateUpdateInfo stateUpdateInfo = new ParticipantStateUpdateInfoData(pubKey, ParticipantNodeState.CONSENSUSED);
+        txTemp.states().update(stateUpdateInfo);
+
+        // TX 准备就绪；
+        PreparedTransaction prepTx = txTemp.prepare();
+
+        // 使用私钥进行签名；
+        prepTx.sign(keyPair);
+
+        // 提交交易；
+        TransactionResponse transactionResponse = prepTx.commit();
+        assertTrue(transactionResponse.isSuccess());
+
+    }
+
 }
