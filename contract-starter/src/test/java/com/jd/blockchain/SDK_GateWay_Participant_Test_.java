@@ -36,8 +36,8 @@ public class SDK_GateWay_Participant_Test_ {
     private BlockchainService service;
 
     //根据密码工具产生的公私钥
-    static String PUB = "3snPdw7i7Pinj7hxYSsivpbde1YmiuT2QkJoxFmzsfssbvuQxiREhH";
-    String PRIV = "177gjyKEYT9EZe4oQ69hRYkS4YDHFEEfpysK43aJStQRK7mcnnji5xU8f78GukDnTQ9Tz83";
+    static String PUB = "3snPdw7i7PX5gizwwxqsXcdBc617EQqVkiLMbzNGoZzhzqTbPDze6d";
+    String PRIV = "177gjwrexzfdB4TwNZTqTPWFETaJfj9iDM32ryn1Dqu9XYtQ3xFPh33KJijJuALzdpxQcxk";
 
     @Before
     public void init() {
@@ -80,7 +80,7 @@ public class SDK_GateWay_Participant_Test_ {
 
         NetworkAddress networkAddress = new NetworkAddress(GATEWAY_IPADDR, 20000);
 
-        ParticipantInfo participantInfo = new ParticipantInfoData("add","4.com", user.getPubKey(), networkAddress);
+        ParticipantInfo participantInfo = new ParticipantInfoData("add","5.com", user.getPubKey(), networkAddress);
 
         // 注册参与方
         txTemp.participants().register(participantInfo);
@@ -114,8 +114,9 @@ public class SDK_GateWay_Participant_Test_ {
 
         System.out.println("Address = "+AddressEncoding.generateAddress(pubKey));
 
+        NetworkAddress networkAddress = new NetworkAddress("127.0.0.1", 20000);
 
-        ParticipantStateUpdateInfo stateUpdateInfo = new ParticipantStateUpdateInfoData(pubKey, ParticipantNodeState.CONSENSUSED);
+        ParticipantStateUpdateInfo stateUpdateInfo = new ParticipantStateUpdateInfoData(pubKey, ParticipantNodeState.CONSENSUSED, networkAddress);
         txTemp.states().update(stateUpdateInfo);
 
         // TX 准备就绪；

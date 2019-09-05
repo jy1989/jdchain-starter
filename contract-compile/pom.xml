@@ -12,7 +12,7 @@
     <artifactId>contract-compile</artifactId>
 
     <properties>
-        <mainClass>com.jd.blockchain.contract.TransferContractImpl</mainClass>
+        <mainClass>com.jd.blockchain.contract.GuanghuImpl</mainClass>
         <!--<mvnHome>E:\apache-maven-3.5.0\</mvnHome>-->
     </properties>
 
