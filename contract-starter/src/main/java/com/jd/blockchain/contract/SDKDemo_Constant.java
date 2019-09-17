@@ -1,8 +1,8 @@
 package com.jd.blockchain.contract;
 
+import com.jd.blockchain.crypto.KeyGenUtils;
 import com.jd.blockchain.crypto.PrivKey;
 import com.jd.blockchain.crypto.PubKey;
-import com.jd.blockchain.tools.keygen.KeyGenCommand;
 import org.apache.commons.io.FileUtils;
 import org.springframework.core.io.ClassPathResource;
 
@@ -22,8 +22,8 @@ public class SDKDemo_Constant {
 
     public static final String PASSWORD = "abc";
 
-    public static PrivKey privkey0 = KeyGenCommand.decodePrivKeyWithRawPassword(PRIV_KEYS[0], PASSWORD);
-    public static PubKey pubKey0 = KeyGenCommand.decodePubKey(PUB_KEYS[0]);
+    public static PrivKey privkey0 = KeyGenUtils.decodePrivKeyWithRawPassword(PRIV_KEYS[0], PASSWORD);
+    public static PubKey pubKey0 = KeyGenUtils.decodePubKey(PUB_KEYS[0]);
 
     public static final byte[] readChainCodes(String contractZip) {
         // 构建合约的字节数组;

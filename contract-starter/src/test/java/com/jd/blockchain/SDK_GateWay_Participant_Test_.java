@@ -70,9 +70,9 @@ public class SDK_GateWay_Participant_Test_ {
         //existed signer
         AsymmetricKeypair keyPair = new BlockchainKeypair(pubKey, privKey);
 
-        PrivKey privKey = KeyGenCommand.decodePrivKeyWithRawPassword(PRIV, SDKDemo_Constant.PASSWORD);
+        PrivKey privKey = KeyGenUtils.decodePrivKeyWithRawPassword(PRIV, SDKDemo_Constant.PASSWORD);
 
-        PubKey pubKey = KeyGenCommand.decodePubKey(PUB);
+        PubKey pubKey = KeyGenUtils.decodePubKey(PUB);
 
         System.out.println("Address = "+ AddressEncoding.generateAddress(pubKey));
 
@@ -80,10 +80,8 @@ public class SDK_GateWay_Participant_Test_ {
 
         NetworkAddress networkAddress = new NetworkAddress(GATEWAY_IPADDR, 20000);
 
-        ParticipantInfo participantInfo = new ParticipantInfoData("add","5.com", user.getPubKey(), networkAddress);
-
         // 注册参与方
-        txTemp.participants().register(participantInfo);
+        txTemp.participants().register("5.com", user.getIdentity(), networkAddress);
 
         // TX 准备就绪；
         PreparedTransaction prepTx = txTemp.prepare();
@@ -108,16 +106,17 @@ public class SDK_GateWay_Participant_Test_ {
         //existed signer
         AsymmetricKeypair keyPair = new BlockchainKeypair(pubKey, privKey);
 
-        PrivKey privKey = KeyGenCommand.decodePrivKeyWithRawPassword(PRIV, SDKDemo_Constant.PASSWORD);
+        PrivKey privKey = KeyGenUtils.decodePrivKeyWithRawPassword(PRIV, SDKDemo_Constant.PASSWORD);
 
-        PubKey pubKey = KeyGenCommand.decodePubKey(PUB);
+        PubKey pubKey = KeyGenUtils.decodePubKey(PUB);
 
         System.out.println("Address = "+AddressEncoding.generateAddress(pubKey));
 
+        BlockchainKeypair user = new BlockchainKeypair(pubKey, privKey);
+
         NetworkAddress networkAddress = new NetworkAddress("127.0.0.1", 20000);
 
-        ParticipantStateUpdateInfo stateUpdateInfo = new ParticipantStateUpdateInfoData(pubKey, ParticipantNodeState.CONSENSUSED, networkAddress);
-        txTemp.states().update(stateUpdateInfo);
+        txTemp.states().update(user.getIdentity(),networkAddress, ParticipantNodeState.ACTIVED);
 
         // TX 准备就绪；
         PreparedTransaction prepTx = txTemp.prepare();

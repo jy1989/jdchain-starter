@@ -21,7 +21,7 @@ public class SDK_Contract_Demo extends SDK_Base_Demo {
 		TransactionTemplate txTpl = blockchainService.newTransaction(ledgerHash);
 
 		// 将jar包转换为二进制数据
-		byte[] contractCode = readChainCodes("contract.jar");
+		byte[] contractCode = readChainCodes("contract-JDChain-Contract.jar");
 
 		// 生成一个合约账号
 		BlockchainKeypair contractDeployKey = BlockchainKeyGenerator.getInstance().generate();
