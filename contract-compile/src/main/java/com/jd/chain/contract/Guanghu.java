@@ -1,6 +1,9 @@
-package com.jd.blockchain.contract;
+package com.jd.chain.contract;
 
 /*广互链码 add by syf 2019.09.03*/
+
+import com.jd.blockchain.contract.Contract;
+import com.jd.blockchain.contract.ContractEvent;
 
 @Contract
 public interface Guanghu {

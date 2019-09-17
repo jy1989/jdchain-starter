@@ -12,7 +12,7 @@
     <artifactId>contract-compile</artifactId>
 
     <properties>
-        <mainClass>com.jd.blockchain.contract.GuanghuImpl</mainClass>
+        <mainClass>com.jd.chain.contract.TransferContractImpl</mainClass>
         <!--<mvnHome>E:\apache-maven-3.5.0\</mvnHome>-->
     </properties>
 
@@ -42,51 +42,26 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.5</version>
-                <configuration>
-                    <!--<includes>-->
-                    <!--<include>**/*Test.java</include>-->
-                    <!--</includes>-->
-                    <skipTests>true</skipTests>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <groupId>com.jd.blockchain</groupId>
+                <artifactId>contract-maven-plugin</artifactId>
+                <version>1.1.0-SNAPSHOT</version>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
+                        <id>make-contract</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>compile</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <finalName>contract</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>${mainClass}</mainClass>
+                            <mainClass>com.jd.chain.contract.TransferContractImpl</mainClass>
                         </manifest>
                     </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
+                    <finalName>contract</finalName>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-                <executions>
-                    <execution>
-                        <id>default-jar</id>
-                        <phase>none</phase>
-                    </execution>
-                </executions>
             </plugin>
 
         </plugins>

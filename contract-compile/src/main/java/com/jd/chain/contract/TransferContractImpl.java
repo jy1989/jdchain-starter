@@ -1,6 +1,8 @@
-package com.jd.blockchain.contract;
+package com.jd.chain.contract;
 
 import com.alibaba.fastjson.JSON;
+import com.jd.blockchain.contract.ContractEventContext;
+import com.jd.blockchain.contract.EventProcessingAware;
 import com.jd.blockchain.crypto.HashDigest;
 import com.jd.blockchain.ledger.KVDataEntry;
 import com.jd.blockchain.ledger.KVDataVO;

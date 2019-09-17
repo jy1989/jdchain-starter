@@ -1,6 +1,6 @@
 package com.jd.blockchain;
 
-import com.jd.blockchain.contract.Guanghu;
+import com.jd.chain.contract.Guanghu;
 import com.jd.blockchain.contract.SDK_Base_Demo;
 import com.jd.blockchain.crypto.HashDigest;
 import com.jd.blockchain.ledger.*;

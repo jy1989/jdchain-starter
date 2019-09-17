@@ -4,6 +4,7 @@ import com.jd.blockchain.ledger.*;
 import com.jd.blockchain.transaction.GenericValueHolder;
 import com.jd.blockchain.transaction.LongValueHolder;
 import com.jd.blockchain.utils.Bytes;
+import com.jd.chain.contract.TransferContract;
 
 import static com.jd.blockchain.contract.SDKDemo_Constant.readChainCodes;
 import static com.jd.blockchain.transaction.ContractReturnValue.decode;

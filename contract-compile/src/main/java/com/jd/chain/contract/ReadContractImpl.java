@@ -1,5 +1,9 @@
-package com.jd.blockchain.contract;
+package com.jd.chain.contract;
 
+import com.jd.blockchain.contract.Contract;
+import com.jd.blockchain.contract.ContractEvent;
+import com.jd.blockchain.contract.ContractEventContext;
+import com.jd.blockchain.contract.EventProcessingAware;
 import com.jd.blockchain.crypto.HashDigest;
 import com.jd.blockchain.ledger.KVDataEntry;
 

@@ -1,5 +1,8 @@
-package com.jd.blockchain.contract;
+package com.jd.chain.contract;
 
+
+import com.jd.blockchain.contract.Contract;
+import com.jd.blockchain.contract.ContractEvent;
 
 @Contract
 public interface ReadContract {
