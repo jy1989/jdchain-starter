@@ -23,6 +23,12 @@ public class GuanghuImpl implements EventProcessingAware,Guanghu {
             }
             eventContext.getLedger().dataAccount(address).setText(account,content,-1L);
         }
+
+        //set the random;
+        long curRandom = System.currentTimeMillis()%2;
+        System.out.println("curRandom="+curRandom);
+        eventContext.getLedger().dataAccount(address).setText(account+"-time",curRandom+"",-1L);
+
         return String.format("DataAccountAddress[%s] -> Create(By Contract Operation) Account = %s and Money = %s Success!!! \r\n",
                 address, account, content);
     }
