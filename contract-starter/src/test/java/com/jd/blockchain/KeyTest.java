@@ -1,10 +1,9 @@
 package com.jd.blockchain;
 
-import com.jd.blockchain.crypto.KeyGenUtils;
-import com.jd.blockchain.crypto.PrivKey;
-import com.jd.blockchain.crypto.PubKey;
+import com.jd.blockchain.crypto.*;
 import com.jd.blockchain.ledger.BlockchainKeypair;
 import com.jd.blockchain.utils.codec.Base58Utils;
+import com.jd.blockchain.utils.io.ByteArray;
 import com.jd.blockchain.utils.security.ShaUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -43,5 +42,18 @@ public class KeyTest {
         byte[] encodedPrivKeyBytes = encryptPrivKey(privKey, pwdBytes);
         String base58PrivKey = Base58Utils.encode(encodedPrivKeyBytes);
         return base58PrivKey;
+    }
+
+    /**
+     * 生成一组跟keygen.sh -n xxx 结果已知的公私钥;
+     */
+    @Test
+    public void keygenTest(){
+        AsymmetricKeypair kp = Crypto.getSignatureFunction("ED25519").generateKeypair();
+        String base58PubKey = KeyGenUtils.encodePubKey(kp.getPubKey());
+        byte[] pwdBytes = ShaUtils.hash_256(ByteArray.fromString("abc", "UTF-8"));
+        String base58PrivKey = KeyGenUtils.encodePrivKey(kp.getPrivKey(), pwdBytes);
+        System.out.println("pubKey="+base58PubKey);
+        System.out.println("privKey="+base58PrivKey);
     }
 }

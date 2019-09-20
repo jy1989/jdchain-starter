@@ -1,12 +1,12 @@
 package com.jd.blockchain;
 
-import com.jd.chain.contract.Guanghu;
 import com.jd.blockchain.contract.SDK_Base_Demo;
 import com.jd.blockchain.crypto.HashDigest;
 import com.jd.blockchain.ledger.*;
 import com.jd.blockchain.sdk.converters.ClientResolveUtil;
 import com.jd.blockchain.transaction.GenericValueHolder;
 import com.jd.blockchain.utils.Bytes;
+import com.jd.chain.contract.Guanghu;
 import org.junit.Test;
 
 import static com.jd.blockchain.contract.SDKDemo_Constant.readChainCodes;
@@ -263,5 +263,13 @@ public class SDKTest extends SDK_Base_Demo {
         GenericValueHolder<String> result = decode(guanghu.putval(address,account,content));
         commit(txTpl);
         return result.get();
+    }
+
+    /**
+     * 生成一个区块链用户，并注册到区块链；
+     */
+    @Test
+    public void registerUserTest() {
+        this.registerUser();
     }
 }

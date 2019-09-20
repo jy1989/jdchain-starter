@@ -12,7 +12,7 @@
     <artifactId>contract-compile</artifactId>
 
     <properties>
-        <mainClass>com.jd.chain.contract.TransferContractImpl</mainClass>
+        <mainClass>com.jd.chain.contract.GuanghuImpl</mainClass>
         <!--<mvnHome>E:\apache-maven-3.5.0\</mvnHome>-->
     </properties>
 
@@ -57,7 +57,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.jd.chain.contract.TransferContractImpl</mainClass>
+                            <mainClass>${mainClass}</mainClass>
                         </manifest>
                     </archive>
                     <finalName>contract</finalName>

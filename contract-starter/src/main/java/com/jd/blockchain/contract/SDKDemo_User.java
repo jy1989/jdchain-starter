@@ -17,7 +17,7 @@ public class SDKDemo_User extends SDK_Base_Demo{
 	/**
 	 * 生成一个区块链用户，并注册到区块链；
 	 */
-	public void registerUser() {
+	public BlockchainKeypair registerUser() {
 		// 在本地定义注册账号的 TX；
 		TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
 		//采用原始的方式来生成BlockchainKeypair;
@@ -35,5 +35,6 @@ public class SDKDemo_User extends SDK_Base_Demo{
 
 		// 提交交易；
 		prepTx.commit();
+		return user;
 	}
 }
