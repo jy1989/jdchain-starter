@@ -81,7 +81,7 @@ public class SDKTest extends SDK_Base_Demo {
     @Test
     public void inserDataByExisDataAccount(){
         if(!isTest) return;
-        this.strDataAccount = "LdeNfJro5ehPFeWVjcaoVPTm7C9cFxBogMWBB";
+        this.strDataAccount = "LdeNremWbMBmmn4hJkgYBqGqruMYE8iZqjeF5";
         TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
 
         //add some data for retrieve;
@@ -195,9 +195,70 @@ public class SDKTest extends SDK_Base_Demo {
         }
     }
 
-    //contract;
     @Test
-    public void executeContract() {
+    public void executeContractOK() {
+        // 发布jar包
+        // 定义交易模板
+        TransactionTemplate txTpl = blockchainService.newTransaction(ledgerHash);
+
+        // 将jar包转换为二进制数据
+        byte[] contractCode = readChainCodes("contract-JDChain-Contract-OK.jar");
+
+        // 生成一个合约账号
+        BlockchainKeypair contractDeployKey = BlockchainKeyGenerator.getInstance().generate();
+        System.out.println("contract's address="+contractDeployKey.getAddress());
+
+        // 生成发布合约操作
+        txTpl.contracts().deploy(contractDeployKey.getIdentity(), contractCode);
+
+        // 生成预发布交易；
+        PreparedTransaction ptx = txTpl.prepare();
+
+        // 对交易进行签名
+        ptx.sign(adminKey);
+
+        // 提交并等待共识返回；
+        TransactionResponse txResp = ptx.commit();
+
+        // 获取合约地址
+        Bytes contractAddress = contractDeployKey.getAddress();
+
+        // 打印交易返回信息
+        System.out.printf("Tx[%s] -> BlockHeight = %s, BlockHash = %s, isSuccess = %s, ExecutionState = %s \r\n",
+                txResp.getContentHash().toBase58(), txResp.getBlockHeight(), txResp.getBlockHash().toBase58(),
+                txResp.isSuccess(), txResp.getExecutionState());
+
+        // 打印合约地址
+        System.out.printf("ContractAddress = %s \r\n", contractAddress.toBase58());
+
+        // 注册一个数据账户
+        BlockchainKeypair dataAccount = createDataAccount();
+        // 获取数据账户地址
+        String dataAddress = dataAccount.getAddress().toBase58();
+        // 打印数据账户地址
+        System.out.printf("DataAccountAddress = %s \r\n", dataAddress);
+
+        // 创建两个账号：
+        String account0 = "jd_zhangsan";
+        String content = "{\"dest\":\"KA006\",\"id\":\"cc-fin08-01\",\"items\":\"FIN001|3030\",\"source\":\"FIN001\"}";
+        System.out.println(create(dataAddress, account0, content, contractAddress));
+    }
+
+    //contract bifurcation
+    @Test
+    public void executeContractBifByHalf(){
+            this.executeContractBif("half");
+    }
+
+    /**
+     * bifurcation, 3:1;
+     */
+    @Test
+    public void executeContractBifBy31(){
+        this.executeContractBif("most");
+    }
+
+    private void executeContractBif(String isHalf) {
         // 发布jar包
         // 定义交易模板
         TransactionTemplate txTpl = blockchainService.newTransaction(ledgerHash);
@@ -242,7 +303,7 @@ public class SDKTest extends SDK_Base_Demo {
         // 创建两个账号：
         String account0 = "jd_zhangsan";
         String content = "{\"dest\":\"KA006\",\"id\":\"cc-fin08-01\",\"items\":\"FIN001|3030\",\"source\":\"FIN001\"}";
-        System.out.println(create(dataAddress, account0, content, contractAddress));
+        System.out.println(createBif(dataAddress, account0, content, contractAddress,isHalf));
     }
 
     private BlockchainKeypair createDataAccount() {
@@ -261,6 +322,15 @@ public class SDKTest extends SDK_Base_Demo {
         // 使用合约创建
         Guanghu guanghu = txTpl.contract(contractAddress, Guanghu.class);
         GenericValueHolder<String> result = decode(guanghu.putval(address,account,content));
+        commit(txTpl);
+        return result.get();
+    }
+
+    private String createBif(String address, String account, String content, Bytes contractAddress, String isHalf) {
+        TransactionTemplate txTpl = blockchainService.newTransaction(ledgerHash);
+        // 使用合约创建
+        Guanghu guanghu = txTpl.contract(contractAddress, Guanghu.class);
+        GenericValueHolder<String> result = decode(guanghu.putvalBifurcation(address,account,content,isHalf));
         commit(txTpl);
         return result.get();
     }

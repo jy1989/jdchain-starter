@@ -5,7 +5,7 @@
     <parent>
         <artifactId>jdchain-starter</artifactId>
         <groupId>com.jd.blockchain</groupId>
-        <version>1.0.3.RELEASE</version>
+        <version>1.0.4.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -44,7 +44,7 @@
             <plugin>
                 <groupId>com.jd.blockchain</groupId>
                 <artifactId>contract-maven-plugin</artifactId>
-                <version>1.1.0-SNAPSHOT</version>
+                <version>1.1.0.RELEASE</version>
                 <executions>
                     <execution>
                         <id>make-contract</id>

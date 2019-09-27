@@ -12,4 +12,7 @@ public interface Guanghu {
 
     @ContractEvent(name = "getval")
     String getval(String address, String account);
+
+    @ContractEvent(name = "putvalBif")
+    String putvalBifurcation(String address, String account, String content, String isHalf);
 }
