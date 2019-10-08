@@ -13,7 +13,7 @@
 <dependency>
     <groupId>com.jd.blockchain</groupId>
     <artifactId>sdk-client</artifactId>
-    <version>1.0.1.RELEASE</version>
+    <version>1.1.0.RELEASE</version>
 </dependency>
 ```
 
@@ -23,7 +23,7 @@
 <dependency>
 	<groupId>com.jd.blockchain</groupId>
 	<artifactId>sdk-pack</artifactId>
-	<version>1.0.1.RELEASE</version>
+	<version>1.1.0.RELEASE</version>
 </dependency>
 ```
 
@@ -343,22 +343,33 @@ if (kvDataEntries != null && kvDataEntries.length > 0) {
 
 ```xml
 <plugin>
-    <artifactId>maven-assembly-plugin</artifactId>
+    <groupId>com.jd.blockchain</groupId>
+    <artifactId>contract-maven-plugin</artifactId>
+    <version>1.1.0.RELEASE</version>
+    <executions>
+        <execution>
+            <id>make-contract</id>
+            <phase>package</phase>
+            <goals>
+                <goal>compile</goal>
+            </goals>
+        </execution>
+    </executions>
     <configuration>
-        <finalName>contract</finalName>
-        <appendAssemblyId>false</appendAssemblyId>
         <archive>
             <manifest>
                 <mainClass>com.jd.blockchain.contract.TransferContractImpl</mainClass>
             </manifest>
         </archive>
-......					
-
+        <finalName>contract</finalName>
+    </configuration>
+</plugin>					
 ```
 
 #### 3.3.	发布与执行
-编译完成之后，根据如上的配置，会在target目录下生成对应的合约压缩文件：contract.jar。  
-将此contract.jar复制至contract-starter模块中src/resources目录下。
+编译完成之后，根据如上的配置，会在target目录下生成对应的合约压缩文件：contract-JDChain-Contract.jar。
+所有合约都是以*-JDChain-Contract.jar来结尾，*代表<finalName>中的名字。  
+将此contract-JDChain-Contract.jar复制至contract-starter模块中src/resources目录下。
 
 ![发布](deploy.png)
 

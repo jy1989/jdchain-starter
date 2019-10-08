@@ -27,19 +27,19 @@ public class GuanghuImpl implements EventProcessingAware,Guanghu {
         //contruct 2:2;
         if("half".equals(isHalf)){
             if(userDir.contains("peer0") || userDir.contains("peer1")){
-                System.out.println("2:2,curNode=peer0/1");
+//                System.out.println("2:2,curNode=peer0/1");
                 eventContext.getLedger().dataAccount(address).setText(account+"-peer","01",-1L);
             }else {
-                System.out.println("2:2,curNode=peer2/3");
+//                System.out.println("2:2,curNode=peer2/3");
                 eventContext.getLedger().dataAccount(address).setText(account+"-peer","23",-1L);
             }
         }else {
             //contruct 3:1;
             if(userDir.contains("peer0") || userDir.contains("peer1") || userDir.contains("peer2")){
-                System.out.println("curNode=peer0/1/2");
+//                System.out.println("curNode=peer0/1/2");
                 eventContext.getLedger().dataAccount(address).setText(account+"-peer","012",-1L);
             }else {
-                System.out.println("curNode=peer3");
+//                System.out.println("curNode=peer3");
                 eventContext.getLedger().dataAccount(address).setText(account+"-peer","3",-1L);
             }
         }
