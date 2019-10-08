@@ -1,17 +1,15 @@
 package com.jd.blockchain;
 
-import com.jd.blockchain.crypto.PrivKey;
-import com.jd.blockchain.crypto.PubKey;
+import com.jd.blockchain.crypto.*;
 import com.jd.blockchain.ledger.BlockchainKeypair;
-import com.jd.blockchain.tools.keygen.KeyGenCommand;
 import com.jd.blockchain.utils.codec.Base58Utils;
-import com.jd.blockchain.utils.io.BytesUtils;
+import com.jd.blockchain.utils.io.ByteArray;
 import com.jd.blockchain.utils.security.ShaUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static com.jd.blockchain.tools.keygen.KeyGenCommand.PUB_KEY_FILE_MAGICNUM;
-import static com.jd.blockchain.tools.keygen.KeyGenCommand.encryptPrivKey;
+import static com.jd.blockchain.crypto.KeyGenUtils.encodePubKey;
+import static com.jd.blockchain.crypto.KeyGenUtils.encryptPrivKey;
 
 /**
  * @author zhaogw
@@ -25,8 +23,8 @@ public class KeyTest {
         String privKeyStr = "177gjuzAyvF8W2KYST8tVPmvGBsPLhXsf55HpHxSbHF7Va995ekXvxjNimEYNt5wP6GxTpW";
         String passwd = "abc";
         // 生成连接网关的账号
-        PrivKey privKey = KeyGenCommand.decodePrivKeyWithRawPassword(privKeyStr, passwd);
-        PubKey pubKey = KeyGenCommand.decodePubKey(pubKeyStr);
+        PrivKey privKey = KeyGenUtils.decodePrivKeyWithRawPassword(privKeyStr, passwd);
+        PubKey pubKey = KeyGenUtils.decodePubKey(pubKeyStr);
         BlockchainKeypair adminKey = new BlockchainKeypair(pubKey, privKey);
 
         Assert.assertEquals(pubKeyStr,encodePubKey(adminKey.getPubKey()));
@@ -34,15 +32,28 @@ public class KeyTest {
         Assert.assertEquals(privKeyStr,encodePrivKey(adminKey.getPrivKey(),pwdBytes));
     }
 
-    public static String encodePubKey(PubKey pubKey) {
-        byte[] pubKeyBytes = BytesUtils.concat(PUB_KEY_FILE_MAGICNUM, pubKey.toBytes());
-        String base58PubKey = Base58Utils.encode(pubKeyBytes);
-        return base58PubKey;
-    }
+//    public static String encodePubKey(PubKey pubKey) {
+//        byte[] pubKeyBytes = BytesUtils.concat(KeyGenUtils.PUB_KEY_FILE_MAGICNUM, pubKey.toBytes());
+//        String base58PubKey = Base58Utils.encode(pubKeyBytes);
+//        return base58PubKey;
+//    }
 
     public static String encodePrivKey(PrivKey privKey, byte[] pwdBytes) {
         byte[] encodedPrivKeyBytes = encryptPrivKey(privKey, pwdBytes);
         String base58PrivKey = Base58Utils.encode(encodedPrivKeyBytes);
         return base58PrivKey;
+    }
+
+    /**
+     * 生成一组跟keygen.sh -n xxx 结果已知的公私钥;
+     */
+    @Test
+    public void keygenTest(){
+        AsymmetricKeypair kp = Crypto.getSignatureFunction("ED25519").generateKeypair();
+        String base58PubKey = KeyGenUtils.encodePubKey(kp.getPubKey());
+        byte[] pwdBytes = ShaUtils.hash_256(ByteArray.fromString("abc", "UTF-8"));
+        String base58PrivKey = KeyGenUtils.encodePrivKey(kp.getPrivKey(), pwdBytes);
+        System.out.println("pubKey="+base58PubKey);
+        System.out.println("privKey="+base58PrivKey);
     }
 }

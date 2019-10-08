@@ -41,35 +41,35 @@ public class SshKeyTest extends SDK_Base_Demo {
         TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
 
         //use the existing pubKey and privKey;
-        String rsaPubKeyWithHead = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcqZgctnwHn5edzYMtMumszluUzIfV6UUEO/ssiP6Ldu8zx1hXOG+xcJkCq3Ys3a3pNOIvXtCI6EBnjYEysWUyvYWSi8Pi8osaqRTHZTXFsntS7rz4tNZlNJt7bGB2itR9MTi2bPipmgJQT8TdI0UWgWfd+iXIfvGcb+ovCN7qUjc5xrNr2CRysOWKxbu3Nryn\n" +
-                "by/i0/EnrDUSV0O/C6uyMbLtNW6Decy82atwqq5u3SXFJ3pICKBkbFa0UbK4V5VWPZEq+F3FUDe6YdabnrDtJAtD7AF5cwHhX0VlBF5E+zkv8Fo4LDk3myYI1x1goNOARVc7rwHB/vFUI0rtaEZh zgw\n";
+        String rsaPubKeyWithHead = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDoicH3x72soMmxQvSWTnJ7H+XdZVTKTtHHP5bzkiHd/Eay8m2/FHuUHtBLS6E1mqAiHYRIOzyMFGSGpSS73nou0iTJxhHgrxO+U+eSmHsn16nXQO73shvWRkbEzk+41qM7/9alC/7qqKAelnTOzC1NH5Y2hckZZMemFKS8EI5ET4oEPbFMTBGMsb71ENEkCXuM\n" +
+                "fr4FiLZaKxOf9xnSfthddqQcSjEC5EV/VgZoHkCk3KNcdBAhepP4dshlb/UbkrVE9afvpSHmfu3o0OdY9rQUy59xv+4nhNRvdgGTkuFLV62ZeGCWrv8iM8ZVztSdwPIkuum8GIncPGvOAXHli0v5 root@vdevops";
         String rsaPrivKeyWithHead = "-----BEGIN RSA PRIVATE KEY-----\n" +
-                "MIIEpAIBAAKCAQEA3KmYHLZ8B5+Xnc2DLTLprM5blMyH1elFBDv7LIj+i3bvM8dY\n" +
-                "VzhvsXCZAqt2LN2t6TTiL17QiOhAZ42BMrFlMr2FkovD4vKLGqkUx2U1xbJ7Uu68\n" +
-                "+LTWZTSbe2xgdorUfTE4tmz4qZoCUE/E3SNFFoFn3folyH7xnG/qLwje6lI3Ocaz\n" +
-                "a9gkcrDlisW7tza8p28v4tPxJ6w1EldDvwursjGy7TVug3nMvNmrcKqubt0lxSd6\n" +
-                "SAigZGxWtFGyuFeVVj2RKvhdxVA3umHWm56w7SQLQ+wBeXMB4V9FZQReRPs5L/Ba\n" +
-                "OCw5N5smCNcdYKDTgEVXO68Bwf7xVCNK7WhGYQIDAQABAoIBAEL6w65rgeh6e/Yt\n" +
-                "bJTqsF2A4fGfx9eZkBaB8nMJPmKs/ly0NM981QKCUB+sVhm2TFTOdZ21ZQ05mlsU\n" +
-                "a9QsXrBxMLtT62jXAHxeOG1x/kl9LMv2pavEkJN1zYBAXGN/LpK1vyY4m543nl4s\n" +
-                "aHBLhWwYaaPKi295gPNgUTBnu+pZ7BlfB0yiBpy6wBlBbun5DxlfwEXLxEKtFuCH\n" +
-                "caTyJ+MIqsMiS+yc+XX91wetYBU+7PpCSIvUeKufBuOJY1bHltyYRbkKs0so2HK8\n" +
-                "BVC/u8Y5R+NzoDmBW7IYw9sofbe4hPBUa8p/SrLLvs4VkrOFuoLwr58tkI8UMUbQ\n" +
-                "IA4IPXECgYEA7fzc5PcTDh9qIFrhfebma/kuuomZGOLJJVv581A8DjlLhBJ0HSw6\n" +
-                "vgUGzGyCSDnHYexH9222hAeOG0hh9K9um88GqtYR3jwJ+uzbLk0E03OUOGgmLggf\n" +
-                "TdLGhp4c+F7L3963AYN6CtASGapPjj2FfKr47Xp3/6jOUOFxLwKwqk0CgYEA7V0L\n" +
-                "kNGWtGjNJiQSNPEd5OK4UsnlaGT9f+8CUPsv3QdwtLgFeGy2fgi2ovn14RWBN4+8\n" +
-                "buRLO33HExIOkJe+CTaDHipgUsEi4QPGaLma2Wv1b0UZAGEHCoEL2EVpv4pz59d6\n" +
-                "5hwb6MHRRf+G3fHaKHVIDmM+gFIWGXdzuPqobmUCgYAFs4MPMSQRuIrwT30LaRao\n" +
-                "C4YlDdrPD8/Fx1hLjeaCaLj4ZwDFGiQmHTS2fPr6A/hUzjZDJSu0KgIrgSZnmDRM\n" +
-                "Iz+DpDE1Y7bRfg8aIto0vpYUa9pOS/+D+8Kpwuvqv0qfCFTWAnJQBAALAVt6itrB\n" +
-                "y86+0apCQ6b9pQjzGVtmGQKBgQCJYg1LqMN9cBstNDuFgPk4fTEKWej531oKLiA9\n" +
-                "FuXBHIlTUB96cBHAKPLsqZhyyqubqQn7dQ9GQ6pxk0Xy0qEfW/nP/974hujVLAYu\n" +
-                "nx7NMPtBh9DMs1wL7F0atDJctpoXWlS70xEkSuoBhcBdvZnzSM6H5VFLnDdGTikg\n" +
-                "q5PJMQKBgQCrMBfYotLC2zcKlff6z+Ijt1KqZ0E6bWrDp+DEYbZvnkjCX8zSZeDK\n" +
-                "1eeHzu7zs46HfjCcFOi9Bpbu7ACT9bwCkNucm2ErqtSgkyNr/SwobCrnpANakRh9\n" +
-                "eKcgwUr9OtopF0PsyocPxOZGq9aAeWPLlcTNWwNEiwrsLDj+34xOsA==\n" +
-                "-----END RSA PRIVATE KEY-----";
+                "MIIEowIBAAKCAQEA6InB98e9rKDJsUL0lk5yex/l3WVUyk7Rxz+W85Ih3fxGsvJt\n" +
+                "vxR7lB7QS0uhNZqgIh2ESDs8jBRkhqUku956LtIkycYR4K8TvlPnkph7J9ep10Du\n" +
+                "97Ib1kZGxM5PuNajO//WpQv+6qigHpZ0zswtTR+WNoXJGWTHphSkvBCORE+KBD2x\n" +
+                "TEwRjLG+9RDRJAl7jH6+BYi2WisTn/cZ0n7YXXakHEoxAuRFf1YGaB5ApNyjXHQQ\n" +
+                "IXqT+HbIZW/1G5K1RPWn76Uh5n7t6NDnWPa0FMufcb/uJ4TUb3YBk5LhS1etmXhg\n" +
+                "lq7/IjPGVc7UncDyJLrpvBiJ3DxrzgFx5YtL+QIDAQABAoIBACn+LpwLYxJYmvO6\n" +
+                "7qZyFjRr5zva/7vlDfcYYa8stZb75tyL8QuvrD1sbxsZ1kvy13YxtGDC6cU2LY0v\n" +
+                "J3oRzCjGZERX04SquTsGtewAQ0VHqfEoVb8/V82TNVZ3F2h+wk2kfuOhTfCccQX1\n" +
+                "D7UEpC2oRZ0k/dLrIy63zaP0rWxiRJeGscyzhQhJtOw5r3QNF1Q+5aiqlfLf1RIa\n" +
+                "7qmU9JkycYqbmIrYmGvwYrEGzcpiSry6xxlQ8GP2S03Zi7T/R3tHQzbknY23ejr2\n" +
+                "6grPW2kRdMFaEPdsBcw2+QEv41EKoRyh7X2lwgjeZj8+hMx95yugS8bnxazETYKz\n" +
+                "Nr+7ggECgYEA+sYOqBDT24WD5nTQoeCmhhYbNqRSUddHDyXmufxL00jkBQ3vb+Z8\n" +
+                "qnAxFk07VreYI+zjO7aVr6vSeNq7LEfzJy/sCQ82pcld0gc3yxot+Wzg0JCOQIdd\n" +
+                "BdlINr9BqbeTOlhLD6VNsRMD7Z7a3+kB0P/6w6SvhJxBTWW+/FhiUUECgYEA7WJo\n" +
+                "t97W+yzHa2WcL+r4ShMez1rN8i7LiFxi8aj/0OHN8EG/CAHLwBRW/91sNUjJF3pZ\n" +
+                "LXKdj1X+PuIN7zWh7I2ic++vWIYlXw6LLhMwgjvUyrWGgdWa9uEtfBcHYWQYKG2b\n" +
+                "EWaikmCYfl7mMqJ5nZLn60XnjEHoE+UIIglFlLkCgYAhqkEBcvDeAXiJkZkIgj4Y\n" +
+                "thMFLN4YOoxBjlcBFMuhG6Hww8QnA4ws3U7ZrZiPtano+L4wn/xMTwa8TrDd6vLL\n" +
+                "ifVn6fDuJLBBp9Jno6YUW/d6SE2wf/uO83JsVxSbkhdjt8Kr4QcjBGh8l9zOPluO\n" +
+                "ES864HrnlIp3t3cCLWNVgQKBgQCEBCmWsEBA2cthx9WPtI42q+GDkc1c9XdNs4t3\n" +
+                "N/Rk118vUXEK4+zLOsSTcTG/hGYJP4qewtIrJ7jIgfEb6mjN5IrHDTIn+hqIfc8b\n" +
+                "ZaKhmuKhhUhzpjaTO/GOxEPffsoMmcAWckzRORU1mlNNL5yQ7GU8K9k04GZPwhy+\n" +
+                "yQdASQKBgCJZsMdl8DahYQFhROsmL4uRj+LoBz4B5z9T14qUsOp5cWvZgoNcjvkk\n" +
+                "Dr4zs6i1t6KeE8RMmRdw37hBk4y/JF2PSXW8BpoCq40zLp4PsKpsuGm7dFv6PEGN\n" +
+                "hqXl6n4ME4b/sW805nEjN8btczxFktXLZHePPAUC08j41Xc+3x1P\n" +
+                "-----END RSA PRIVATE KEY-----\n";
 
         RSAKeyParameters pubKey = (RSAKeyParameters) parser.pubKeyParse(rsaPubKeyWithHead);
         RSAPrivateCrtKeyParameters privKey = (RSAPrivateCrtKeyParameters) parser.privKeyParse(rsaPrivKeyWithHead);
@@ -100,11 +100,11 @@ public class SshKeyTest extends SDK_Base_Demo {
         TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
 
         //use the existing pubKey and privKey;
-        String ecdsaPubKeyWithHead = "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEX3TsTK9cSYvnnxI0GhJLKk+6tRUxZt/vNpKuGuLq+o8ri4Eeacscl4en0b1V6xzq16CEsAW3y6wv5uHruFTBs= zgw";
+        String ecdsaPubKeyWithHead = "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOTKTmCWGBAx/ibQG15olqqubOIouSVcqzdLzA8IXX0eiaDX5WD+6GYX+4jdXLN8Ppkznu7BD0eVk5sH/sjzXHQ= root@vdevops";
         String ecdsaPrivKeyWithHead = "-----BEGIN EC PRIVATE KEY-----\n" +
-                "MHcCAQEEIJLuqNFoN03hXKsOLYM5i+lxblchzOOdc83vqHfZOnRooAoGCCqGSM49\n" +
-                "AwEHoUQDQgAERfdOxMr1xJi+efEjQaEksqT7q1FTFm3+82kq4a4ur6jyuLgR5pyx\n" +
-                "yXh6fRvVXrHOrXoISwBbfLrC/m4eu4VMGw==\n" +
+                "MHcCAQEEIC4oJ9UTT2Bd/NZsuu2JsJR8cy5wLNgBKpy0ujQ9hCqcoAoGCCqGSM49\n" +
+                "AwEHoUQDQgAE5MpOYJYYEDH+JtAbXmiWqq5s4ii5JVyrN0vMDwhdfR6JoNflYP7o\n" +
+                "Zhf7iN1cs3w+mTOe7sEPR5WTmwf+yPNcdA==\n" +
                 "-----END EC PRIVATE KEY-----";
 
         ECPublicKeyParameters pubKey = (ECPublicKeyParameters) parser.pubKeyParse(ecdsaPubKeyWithHead);
@@ -148,13 +148,13 @@ public class SshKeyTest extends SDK_Base_Demo {
         TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
 
         //use the existing pubKey and privKey;
-        String ed25519PubKeyWithHead = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAk6IlhvvyZ4+IiE7qhpJ1ZBpmkRE5zfX6fHtsrNfGXc zgw";
+        String ed25519PubKeyWithHead = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIaznHMQxUjkiUHHF1Go6JxPwsmRhms5wALiimI5anxe root@vdevops";
         String ed25519PrivKeyWithHead = "-----BEGIN OPENSSH PRIVATE KEY-----\n" +
                 "b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW\n" +
-                "QyNTUxOQAAACAJOiJYb78mePiIhO6oaSdWQaZpEROc31+nx7bKzXxl3AAAAIiIJk/EiCZP\n" +
-                "xAAAAAtzc2gtZWQyNTUxOQAAACAJOiJYb78mePiIhO6oaSdWQaZpEROc31+nx7bKzXxl3A\n" +
-                "AAAEDH8A3gZJKJLL3LMDtwDa4AW0wvQrkbZu0A06d4Wv4ngAk6IlhvvyZ4+IiE7qhpJ1ZB\n" +
-                "pmkRE5zfX6fHtsrNfGXcAAAAA3pndwEC\n" +
+                "QyNTUxOQAAACCGs5xzEMVI5IlBxxdRqOicT8LJkYZrOcAC4opiOWp8XgAAAJBi8qFPYvKh\n" +
+                "TwAAAAtzc2gtZWQyNTUxOQAAACCGs5xzEMVI5IlBxxdRqOicT8LJkYZrOcAC4opiOWp8Xg\n" +
+                "AAAEADWOn377p12if6kNbbejJmH9v9flwoqTZDw98/XvcW8oaznHMQxUjkiUHHF1Go6JxP\n" +
+                "wsmRhms5wALiimI5anxeAAAADHJvb3RAdmRldm9wcwE=\n" +
                 "-----END OPENSSH PRIVATE KEY-----";
 
         Ed25519PublicKeyParameters pubKey = (Ed25519PublicKeyParameters) parser.pubKeyParse(ed25519PubKeyWithHead);
