@@ -27,3 +27,15 @@ master与最新的release分支保持一致。其它分支打tag。
 5）新增了“快速部署JDChain.pdf”文档，方便开发使用；   
 6）添加了ssh-keygen的整合单元测试SshKeyTest.java； 
 
+## 4.版本1.0.4.RELEASE说明
+1）样例基于JDChain1.1.0.RELEASE版本构建;  
+2）合约构建采用了全新的插件：contract-maven-plugin；  
+3）编写合约默认不允许使用系统package：com.jd.blockchain.contract，可改为：com.jd.chain.contract ；  
+4）优化了SDKDemo_Constant.java类，只保留一组公私钥；  
+5）根据JDChain的代码优化逻辑，将类名KeyGenCommand改为KeyGenUtils；  
+6）针对权限验证，添加了权限测试类：PermissionTest.java ；  
+7）SDKTest.java测试类进行了完善；  
+8）针对动态添加参与方给出了单元测试样例：SDK_GateWay_Participant_Test_.java；  
+9）针对ssh兼容测试给出了单元测试样例：SshKeyTest.java；  
+10）删除“快速部署JDChain.pdf”文档，改用全新的界面部署的方式；  
+   
