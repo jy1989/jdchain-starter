@@ -34,7 +34,7 @@
 
 ```java
     //创建服务代理
-    public static BlockchainKeyPair CLIENT_CERT = BlockchainKeyGenerator.getInstance().generate();
+    public static BlockchainKeypair CLIENT_CERT = BlockchainKeyGenerator.getInstance().generate();
     final String GATEWAY_IP = "127.0.0.1";
     final int GATEWAY_PORT = 80;
     final boolean SECURE = false;
@@ -55,7 +55,7 @@
     TransactionTemplate txTemp = service.newTransaction(ledgerHash);
     SignatureFunction signatureFunction = asymmetricCryptography.getSignatureFunction(CryptoAlgorithm.ED25519);
     CryptoKeyPair cryptoKeyPair = signatureFunction.generateKeyPair();
-    BlockchainKeyPair user = new BlockchainKeyPair(cryptoKeyPair.getPubKey(), cryptoKeyPair.getPrivKey());
+    BlockchainKeypair user = new BlockchainKeypair(cryptoKeyPair.getPubKey(), cryptoKeyPair.getPrivKey());
     
     txTemp.users().register(user.getIdentity());
     
@@ -80,7 +80,7 @@
     TransactionTemplate txTemp = service.newTransaction(ledgerHash);
     SignatureFunction signatureFunction = asymmetricCryptography.getSignatureFunction(CryptoAlgorithm.ED25519);
     CryptoKeyPair cryptoKeyPair = signatureFunction.generateKeyPair();
-    BlockchainKeyPair dataAccount = new BlockchainKeyPair(cryptoKeyPair.getPubKey(), cryptoKeyPair.getPrivKey());
+    BlockchainKeypair dataAccount = new BlockchainKeypair(cryptoKeyPair.getPubKey(), cryptoKeyPair.getPrivKey());
     
     txTemp.dataAccounts().register(dataAccount.getIdentity());
     
