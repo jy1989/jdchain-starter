@@ -70,9 +70,21 @@ public class SDKTest extends SDK_Base_Demo {
         prepTx.sign(adminKey);
 
         // 提交交易；
-        prepTx.commit();
+        TransactionResponse transactionResponse = prepTx.commit();
+        if(transactionResponse.isSuccess()){
+            getData(dataAccount.getAddress().toBase58());
+        }else {
+            System.out.println("exception="+transactionResponse.getExecutionState().toString());
+        }
+    }
 
-        getData(dataAccount.getAddress().toBase58());
+    @Test
+    public void insertDataMore() throws InterruptedException {
+        for(int i=0;i<15;i++){
+            insertData();
+            Thread.sleep(1000);
+        }
+
     }
 
     /**
@@ -202,7 +214,7 @@ public class SDKTest extends SDK_Base_Demo {
         TransactionTemplate txTpl = blockchainService.newTransaction(ledgerHash);
 
         // 将jar包转换为二进制数据
-        byte[] contractCode = readChainCodes("contract-JDChain-Contract-OK.jar");
+        byte[] contractCode = readChainCodes("contract-JDChain-Contract.jar");
 
         // 生成一个合约账号
         BlockchainKeypair contractDeployKey = BlockchainKeyGenerator.getInstance().generate();
@@ -341,5 +353,12 @@ public class SDKTest extends SDK_Base_Demo {
     @Test
     public void registerUserTest() {
         this.registerUser();
+    }
+
+    @Test
+    public void rigisterUserMore(){
+        for(int i=0;i<15;i++){
+            this.registerUser();
+        }
     }
 }
