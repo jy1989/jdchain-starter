@@ -24,6 +24,13 @@ public class SDKDemo_Constant {
 //    public static final String PRIV_KEY = "177gjzHTznYdPgWqZrH43W3yp37onm74wYXT4v9FukpCHBrhRysBBZh7Pzdo5AMRyQGJD7x";
 //    public static final String PASSWORD = "abc";
 
+    //peer3
+//    public static final String GW_IPADDR = "localhost";
+//    public static final int GW_PORT = 11000;
+//    public static final String PUB_KEY = "3snPdw7i7PifPuRX7fu3jBjsb3rJRfDe9GtbDfvFJaJ4V4hHXQfhwk";
+//    public static final String PRIV_KEY = "177gk1pudweTq5zgJTh8y3ENCTwtSFsKyX7YnpuKPo7rKgCkCBXVXh5z2syaTCPEMbuWRns";
+//    public static final String PASSWORD = "abc";
+
     public static PrivKey privkey0 = KeyGenUtils.decodePrivKeyWithRawPassword(PRIV_KEY, PASSWORD);
     public static PubKey pubKey0 = KeyGenUtils.decodePubKey(PUB_KEY);
 
