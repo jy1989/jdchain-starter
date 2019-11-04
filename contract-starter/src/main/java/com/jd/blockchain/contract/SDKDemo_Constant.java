@@ -13,15 +13,14 @@ public class SDKDemo_Constant {
     //151.39;
     public static final String GW_IPADDR = "192.168.151.39";
     public static final int GW_PORT = 18081;
-    public static final String PUB_KEY = "3snPdw7i7PctewjZ9VfmW62ERcYwmSbSTAHxNPFiJCW5ccTfdDYcHk";
-    public static final String PRIV_KEY = "177gjzk3egRRHg6tYqjToSqZZorArJ7Ke9xL6kDw1EbNmrsN6NZxfqejCZCEuGnCenKUeAM";
+    public static final String PUB_KEY = "3snPdw7i7PdFoVTPbLGEutzxJkPmp58oWRJ1nzYF3YwsAPxsCkzufo";
+    public static final String PRIV_KEY = "177gjysz11aDQy6MaxkstvGVbQXFohAGvkqedwD584ASGkdGy59PcHkHy6KPCtydKhGBHb5";
     public static final String PASSWORD = "abc";
 
     //localhost;
 //    public static final String GW_IPADDR = "localhost";
 //    public static final int GW_PORT = 11000;
-//    public static final String PUB_KEY = "
-// 3snPdw7i7PjVKiTH2VnXZu5H8QmNaSXpnk4ei533jFpuifyjS5zzH9";
+//    public static final String PUB_KEY = "3snPdw7i7PjVKiTH2VnXZu5H8QmNaSXpnk4ei533jFpuifyjS5zzH9";
 //    public static final String PRIV_KEY = "177gjzHTznYdPgWqZrH43W3yp37onm74wYXT4v9FukpCHBrhRysBBZh7Pzdo5AMRyQGJD7x";
 //    public static final String PASSWORD = "abc";
 

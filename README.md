@@ -39,3 +39,6 @@ master与最新的release分支保持一致。其它分支打tag。
 9）针对ssh兼容测试给出了单元测试样例：SshKeyTest.java；  
 10）删除“快速部署JDChain.pdf”文档，改用全新的界面部署的方式；  
    
+## 4.版本1.0.5.RELEASE说明
+1）样例基于JDChain1.1.1.RELEASE版本构建;  
+   
