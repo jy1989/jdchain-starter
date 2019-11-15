@@ -12,11 +12,12 @@ import java.io.File;
 public class SDKDemo_Constant {
 
     //151.39;
-    public static final String GW_IPADDR = "127.0.0.1";
-    public static final int GW_PORT = 8081;
-    public static final String GW_PUB_KEY = "3snPdw7i7PfgxDTex8TitPdXSTAApuSdWUKdtCvNJm4v1d1RJRBxaT";
-    public static final String GW_PRIV_KEY = "177gk1bsDvHRCcsiepN8NHXAwPah3Sy8fM1hBYwkJocGAaNJMgXaVHDLMZPfCHdUbbkp47Y";
-    public static final String GW_PASSWORD = "AXhhKihAa2LaRwY5mftnngSPKDF4N9JignnQ4skynY8y";
+    public static final String GW_IPADDR = "localhost";
+    public static final int GW_PORT = 11000;
+    public static final String GW_PUB_KEY = "3snPdw7i7PjVKiTH2VnXZu5H8QmNaSXpnk4ei533jFpuifyjS5zzH9";
+    public static final String GW_PRIV_KEY = "177gjzHTznYdPgWqZrH43W3yp37onm74wYXT4v9FukpCHBrhRysBBZh7Pzdo5AMRyQGJD7x";
+    //the content of *.pwd file;
+    public static final String GW_PASSWORD = "DYu3G8aGTMBW1WrTw76zxQJQU4DHLw9MLyy7peG4LKkY";
 
     //localhost;
 //    public static final String GW_IPADDR = "localhost";
