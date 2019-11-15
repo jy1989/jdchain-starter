@@ -3,6 +3,7 @@ package com.jd.blockchain.contract;
 import com.jd.blockchain.crypto.KeyGenUtils;
 import com.jd.blockchain.crypto.PrivKey;
 import com.jd.blockchain.crypto.PubKey;
+import com.jd.blockchain.ledger.BlockchainKeypair;
 import org.apache.commons.io.FileUtils;
 import org.springframework.core.io.ClassPathResource;
 
@@ -11,11 +12,11 @@ import java.io.File;
 public class SDKDemo_Constant {
 
     //151.39;
-    public static final String GW_IPADDR = "192.168.151.39";
-    public static final int GW_PORT = 18081;
-    public static final String PUB_KEY = "3snPdw7i7PdFoVTPbLGEutzxJkPmp58oWRJ1nzYF3YwsAPxsCkzufo";
-    public static final String PRIV_KEY = "177gjysz11aDQy6MaxkstvGVbQXFohAGvkqedwD584ASGkdGy59PcHkHy6KPCtydKhGBHb5";
-    public static final String PASSWORD = "abc";
+    public static final String GW_IPADDR = "127.0.0.1";
+    public static final int GW_PORT = 8081;
+    public static final String GW_PUB_KEY = "3snPdw7i7PfgxDTex8TitPdXSTAApuSdWUKdtCvNJm4v1d1RJRBxaT";
+    public static final String GW_PRIV_KEY = "177gk1bsDvHRCcsiepN8NHXAwPah3Sy8fM1hBYwkJocGAaNJMgXaVHDLMZPfCHdUbbkp47Y";
+    public static final String GW_PASSWORD = "AXhhKihAa2LaRwY5mftnngSPKDF4N9JignnQ4skynY8y";
 
     //localhost;
 //    public static final String GW_IPADDR = "localhost";
@@ -31,8 +32,9 @@ public class SDKDemo_Constant {
 //    public static final String PRIV_KEY = "177gk1pudweTq5zgJTh8y3ENCTwtSFsKyX7YnpuKPo7rKgCkCBXVXh5z2syaTCPEMbuWRns";
 //    public static final String PASSWORD = "abc";
 
-    public static PrivKey privkey0 = KeyGenUtils.decodePrivKeyWithRawPassword(PRIV_KEY, PASSWORD);
-    public static PubKey pubKey0 = KeyGenUtils.decodePubKey(PUB_KEY);
+    public static PrivKey gwPrivkey0 = KeyGenUtils.decodePrivKey(GW_PRIV_KEY, GW_PASSWORD);
+    public static PubKey gwPubKey0 = KeyGenUtils.decodePubKey(GW_PUB_KEY);
+    public static BlockchainKeypair adminKey = new BlockchainKeypair(gwPubKey0, gwPrivkey0);
 
     public static final byte[] readChainCodes(String contractZip) {
         // 构建合约的字节数组;

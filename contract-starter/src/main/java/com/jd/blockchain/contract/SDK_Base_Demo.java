@@ -22,11 +22,7 @@ public abstract class SDK_Base_Demo {
 
     public void init() {
         // 生成连接网关的账号
-        PrivKey privKey = KeyGenUtils.decodePrivKeyWithRawPassword(SDKDemo_Constant.PRIV_KEY, SDKDemo_Constant.PASSWORD);
-
-        PubKey pubKey = KeyGenUtils.decodePubKey(SDKDemo_Constant.PUB_KEY);
-
-        adminKey = new BlockchainKeypair(pubKey, privKey);
+        adminKey = SDKDemo_Constant.adminKey;
 
         // 连接网关
         GatewayServiceFactory serviceFactory = GatewayServiceFactory.connect(SDKDemo_Constant.GW_IPADDR,
