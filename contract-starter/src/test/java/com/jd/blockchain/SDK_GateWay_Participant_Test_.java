@@ -42,10 +42,10 @@ public class SDK_GateWay_Participant_Test_ {
     @Before
     public void init() {
 
-        privKey = SDKDemo_Constant.privkey0;
-        pubKey = SDKDemo_Constant.pubKey0;
+        privKey = SDKDemo_Constant.gwPrivkey0;
+        pubKey = SDKDemo_Constant.gwPubKey0;
 
-        CLIENT_CERT = new BlockchainKeypair(SDKDemo_Constant.pubKey0, SDKDemo_Constant.privkey0);
+        CLIENT_CERT = new BlockchainKeypair(SDKDemo_Constant.gwPubKey0, SDKDemo_Constant.gwPrivkey0);
         GATEWAY_IPADDR = "192.168.151.39";
         GATEWAY_PORT = 18081;
         SECURE = false;
@@ -70,9 +70,9 @@ public class SDK_GateWay_Participant_Test_ {
         //existed signer
         AsymmetricKeypair keyPair = new BlockchainKeypair(pubKey, privKey);
 
-        PrivKey privKey = KeyGenUtils.decodePrivKeyWithRawPassword(PRIV, SDKDemo_Constant.PASSWORD);
+        PrivKey privKey = SDKDemo_Constant.gwPrivkey0;
 
-        PubKey pubKey = KeyGenUtils.decodePubKey(PUB);
+        PubKey pubKey = SDKDemo_Constant.gwPubKey0;
 
         System.out.println("Address = "+ AddressEncoding.generateAddress(pubKey));
 
@@ -106,9 +106,9 @@ public class SDK_GateWay_Participant_Test_ {
         //existed signer
         AsymmetricKeypair keyPair = new BlockchainKeypair(pubKey, privKey);
 
-        PrivKey privKey = KeyGenUtils.decodePrivKeyWithRawPassword(PRIV, SDKDemo_Constant.PASSWORD);
+        PrivKey privKey = SDKDemo_Constant.gwPrivkey0;
 
-        PubKey pubKey = KeyGenUtils.decodePubKey(PUB);
+        PubKey pubKey = SDKDemo_Constant.gwPubKey0;
 
         System.out.println("Address = "+AddressEncoding.generateAddress(pubKey));
 
