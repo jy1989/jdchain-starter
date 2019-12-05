@@ -2,6 +2,9 @@ package com.jd.blockchain;
 
 import com.jd.blockchain.contract.SDK_Base_Demo;
 import com.jd.blockchain.crypto.HashDigest;
+import com.jd.blockchain.crypto.KeyGenUtils;
+import com.jd.blockchain.crypto.PrivKey;
+import com.jd.blockchain.crypto.PubKey;
 import com.jd.blockchain.ledger.*;
 import com.jd.blockchain.sdk.converters.ClientResolveUtil;
 import com.jd.blockchain.transaction.GenericValueHolder;
@@ -360,5 +363,58 @@ public class SDKTest extends SDK_Base_Demo {
         for(int i=0;i<15;i++){
             this.registerUser();
         }
+    }
+
+    /**
+     * generate a new BlockchainKeypair by public/private/password info; you can get the Strings by keygen.sh;
+     * @return
+     */
+    private BlockchainKeypair getExistUser(){
+        String pubKeyStr = "3snPdw7i7PXwePqNj5f6ZbYBGXSHbH4XJefqf735WtcDQvkDdwPSGU";
+        String privKeyStr = "177gjvtAB5pQ23Kpw1icRcYa8vRg5aQiWfJzwj5AbD4hJbMnN8eLtcvkaf5w2T4poU5imR9";
+        String passwd = "DYu3G8aGTMBW1WrTw76zxQJQU4DHLw9MLyy7peG4LKkY";
+        // 生成连接网关的账号
+        PrivKey privKey = KeyGenUtils.decodePrivKey(privKeyStr, passwd);
+        PubKey pubKey = KeyGenUtils.decodePubKey(pubKeyStr);
+        return new BlockchainKeypair(pubKey, privKey);
+    }
+
+    /**
+     * rigister the exist user to ledger;
+     */
+    @Test
+    public void registerExistUser(){
+        // 在本地定义注册账号的 TX；
+        TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
+        BlockchainKeypair existUser = getExistUser();
+        System.out.println("user'id="+existUser.getAddress());
+        txTemp.users().register(existUser.getIdentity());
+        // TX 准备就绪；
+        PreparedTransaction prepTx = txTemp.prepare();
+        prepTx.sign(adminKey);
+
+        // 提交交易；
+        prepTx.commit();
+    }
+
+    /**
+     * use the exist user to sign;
+     */
+    @Test
+    public void registerNewUserByExistUser(){
+        //first invoke the case: registerExistUser(), to rigister user in the ledger;
+        //now use the existUser to sign;
+        // 在本地定义注册账号的 TX；
+        TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
+
+        BlockchainKeypair user = BlockchainKeyGenerator.getInstance().generate();
+        System.out.println("user'id="+user.getAddress());
+        txTemp.users().register(user.getIdentity());
+        // TX 准备就绪；
+        PreparedTransaction prepTx = txTemp.prepare();
+        prepTx.sign(getExistUser());
+
+        // 提交交易；
+        prepTx.commit();
     }
 }
