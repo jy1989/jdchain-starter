@@ -81,12 +81,13 @@ public class PermissionTest extends SDK_Base_Demo {
         // 定义交易模板
         TransactionTemplate txTpl = blockchainService.newTransaction(ledgerHash);
         // 定义角色权限；
-        txTpl.security().roles().configure("MANAGER3")
+        txTpl.security().roles().configure("MANAGER2")
                 .enable(LedgerPermission.REGISTER_USER)
                 .enable(LedgerPermission.CONFIGURE_ROLES)
                 .enable(LedgerPermission.REGISTER_DATA_ACCOUNT)
+                .enable(LedgerPermission.WRITE_DATA_ACCOUNT)
 //                .disable(LedgerPermission.REGISTER_USER)
-                .enable(TransactionPermission.CONTRACT_OPERATION);
+                .enable(TransactionPermission.DIRECT_OPERATION);
 
         TransactionResponse txResp = commit(txTpl);
         System.out.println(txResp.isSuccess());
