@@ -3,6 +3,9 @@ package com.jd.blockchain;
 import com.jd.blockchain.contract.SDKDemo_Constant;
 import com.jd.blockchain.contract.SDK_Base_Demo;
 import com.jd.blockchain.crypto.HashDigest;
+import com.jd.blockchain.crypto.KeyGenUtils;
+import com.jd.blockchain.crypto.PrivKey;
+import com.jd.blockchain.crypto.PubKey;
 import com.jd.blockchain.ledger.*;
 import com.jd.blockchain.sdk.BlockchainService;
 import com.jd.blockchain.sdk.client.GatewayServiceFactory;
@@ -22,6 +25,18 @@ public class SDKDemo_RegisterUser extends SDK_Base_Demo {
     @Before
     public void setup(){
         existUser = BlockchainKeyGenerator.getInstance().generate();
+//        existUser = getExistUser();
+    }
+
+    private BlockchainKeypair getExistUser(){
+//        通过bin/keygen.sh可获得如下公私钥，格式：sh keygen.sh –n xxx
+        String pubKeyStr = "3snPdw7i7PXwePqNj5f6ZbYBGXSHbH4XJefqf735WtcDQvkDdwPSGU";
+        String privKeyStr = "177gjvtAB5pQ23Kpw1icRcYa8vRg5aQiWfJzwj5AbD4hJbMnN8eLtcvkaf5w2T4poU5imR9";
+        String passwd = "DYu3G8aGTMBW1WrTw76zxQJQU4DHLw9MLyy7peG4LKkY";
+        // 生成连接网关的账号
+        PrivKey privKey = KeyGenUtils.decodePrivKey(privKeyStr, passwd);
+        PubKey pubKey = KeyGenUtils.decodePubKey(pubKeyStr);
+        return new BlockchainKeypair(pubKey, privKey);
     }
 
     private void registerRole(String roleName){
@@ -63,34 +78,6 @@ public class SDKDemo_RegisterUser extends SDK_Base_Demo {
         System.out.println("registerExistUser() done.");
     }
 
-    private void checkInsertDataByExistUser() {
-        System.out.println("checkInsertDataByExistUser() start...");
-        if(!isTest) return;
-        // 在本地定义注册账号的 TX；
-        TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
-        //采用KeyGenerator来生成BlockchainKeypair;
-        BlockchainKeypair dataAccount = BlockchainKeyGenerator.getInstance().generate();
-
-        txTemp.dataAccounts().register(dataAccount.getIdentity());
-        txTemp.dataAccount(dataAccount.getAddress()).setText("key1","value1",-1);
-        //add some data for retrieve;
-        this.strDataAccount = dataAccount.getAddress().toBase58();
-        System.out.println("current dataAccount="+dataAccount.getAddress());
-        txTemp.dataAccount(dataAccount.getAddress()).setText("cc-fin01-01","{\"dest\":\"KA001\",\"id\":\"cc-fin01-01\",\"items\":\"FIN001|5000\",\"source\":\"FIN001\"}",-1);
-
-        // TX 准备就绪
-        PreparedTransaction prepTx = txTemp.prepare();
-        prepTx.sign(existUser);
-
-        // 提交交易；
-        TransactionResponse transactionResponse = prepTx.commit();
-        if(transactionResponse.isSuccess()){
-            System.out.println("result="+transactionResponse.isSuccess());
-        }else {
-            System.out.println("exception="+transactionResponse.getExecutionState().toString());
-        }
-    }
-
     private void writeDataAcount() {
         boolean SECURE = false;
         GatewayServiceFactory serviceFactory = GatewayServiceFactory.connect(SDKDemo_Constant.GW_IPADDR, SDKDemo_Constant.GW_PORT, SECURE,
@@ -114,15 +101,13 @@ public class SDKDemo_RegisterUser extends SDK_Base_Demo {
         }else {
             System.out.println(transactionResponse.getExecutionState());
         }
-
     }
 
     @Test
     public void checkPermission(){
-        String roleName = "ROLE-ADD-DATA-3";
+        String roleName = "ROLE-ADD-DATA";
         registerRole(roleName);
         registerExistUser(roleName);
-//        checkInsertDataByExistUser();
         writeDataAcount();
     }
 }

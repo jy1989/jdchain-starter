@@ -32,12 +32,6 @@ public class KeyTest {
         Assert.assertEquals(privKeyStr,encodePrivKey(adminKey.getPrivKey(),pwdBytes));
     }
 
-//    public static String encodePubKey(PubKey pubKey) {
-//        byte[] pubKeyBytes = BytesUtils.concat(KeyGenUtils.PUB_KEY_FILE_MAGICNUM, pubKey.toBytes());
-//        String base58PubKey = Base58Utils.encode(pubKeyBytes);
-//        return base58PubKey;
-//    }
-
     public static String encodePrivKey(PrivKey privKey, byte[] pwdBytes) {
         byte[] encodedPrivKeyBytes = encryptPrivKey(privKey, pwdBytes);
         String base58PrivKey = Base58Utils.encode(encodedPrivKeyBytes);

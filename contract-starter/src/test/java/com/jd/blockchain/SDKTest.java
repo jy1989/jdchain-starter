@@ -487,6 +487,12 @@ public class SDKTest extends SDK_Base_Demo {
         }
     }
 
+    /**
+     * use the same blockchainService(connected by adminKey);
+     * because it's policy is at_least_one(see: DataAccountRegisterOperationHandle.java),
+     * although signed by existUser, the operation of "txTemp.dataAccounts().register(...)" also can passed;
+     * so you will use a new user to connect the gateway and signed by it. you can see the demo {@link SDKDemo_RegisterUser#checkPermission()}
+     */
     @Test
     public void checkPermission(){
         String roleName = "ROLE-ADD-DATA";
