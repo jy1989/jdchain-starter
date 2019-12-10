@@ -6,7 +6,7 @@
 | 2 | 测试用pubKeyStr | 3snPdw7i7PXwePqNj5f6ZbYBGXSHbH4XJefqf735WtcDQvkDdwPSGU |
 | 3 | 测试用privKeyStr | 177gjvtAB5pQ23Kpw1icRcYa8vRg5aQiWfJzwj5AbD4hJbMnN8eLtcvkaf5w2T4poU5imR9 |
 | 4 | 测试用Passwd | DYu3G8aGTMBW1WrTw76zxQJQU4DHLw9MLyy7peG4LKkY |
-| 5 | 参考视频 |  |
+| 5 | 参考视频 | 链接地址：https://3.cn/XEylHuZhv  访问密码: 6wx3cn |  
 
 ## 2.简介
 本文的测试样例为SDKDemo_RegisterUser.java。  
