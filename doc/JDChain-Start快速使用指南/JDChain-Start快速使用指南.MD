@@ -401,7 +401,7 @@ public class SDK_Contract_Demo extends SDK_Base_Demo {
 在执行完成之后，可以在api接口中查询相关的信息。
 
 ##### 3.3.3.	根据合约地址查询
-http://192.168.151.45:7080/ledgers/6Gw3cK4uazegy4HjoaM81ck9NgYLNoKyBMb7a1TK1jt3d/contracts/address/5SmDBPXfXoSsJmfJskkpeVbZkxfkawqWE9CE  
+http://192.168.151.45:8081/ledgers/6Gw3cK4uazegy4HjoaM81ck9NgYLNoKyBMb7a1TK1jt3d/contracts/address/5SmDBPXfXoSsJmfJskkpeVbZkxfkawqWE9CE  
 其中：6Gw3cK4uazegy4HjoaM81ck9NgYLNoKyBMb7a1TK1jt3d为账本哈希，5SmDBPXfXoSsJmfJskkpeVbZkxfkawqWE9CE为合约地址。  
 结果：
 
