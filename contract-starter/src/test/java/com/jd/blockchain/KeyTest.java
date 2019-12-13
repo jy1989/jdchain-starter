@@ -2,6 +2,9 @@ package com.jd.blockchain;
 
 import com.jd.blockchain.crypto.*;
 import com.jd.blockchain.ledger.BlockchainKeypair;
+import com.jd.blockchain.ledger.BytesData;
+import com.jd.blockchain.ledger.BytesValue;
+import com.jd.blockchain.transaction.KVData;
 import com.jd.blockchain.utils.codec.Base58Utils;
 import com.jd.blockchain.utils.io.ByteArray;
 import com.jd.blockchain.utils.security.ShaUtils;
@@ -51,5 +54,13 @@ public class KeyTest {
         System.out.println("pubKey="+base58PubKey);
         System.out.println("privKey="+base58PrivKey);
         System.out.println("base58PwdKey="+base58PwdKey);
+    }
+
+    @Test
+    public void checkBytesData(){
+        BytesValue bytesValue = BytesData.fromText("value2");
+        KVData kvdata = new KVData("key1", bytesValue, 0);
+        System.out.println(kvdata.getValue().getValue().toUTF8String());
+        System.out.println(BytesData.toText(bytesValue));
     }
 }
