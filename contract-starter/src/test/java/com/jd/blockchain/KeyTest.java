@@ -11,6 +11,8 @@ import com.jd.blockchain.utils.security.ShaUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
+
 import static com.jd.blockchain.crypto.KeyGenUtils.encodePubKey;
 import static com.jd.blockchain.crypto.KeyGenUtils.encryptPrivKey;
 
@@ -57,10 +59,15 @@ public class KeyTest {
     }
 
     @Test
-    public void checkBytesData(){
-        BytesValue bytesValue = BytesData.fromText("value2");
-        KVData kvdata = new KVData("key1", bytesValue, 0);
-        System.out.println(kvdata.getValue().getValue().toUTF8String());
+    public void checkBytesData() throws UnsupportedEncodingException {
+        String keyStr = "key2";
+        String valueStr = "value2";
+        BytesValue bytesValue = BytesData.fromText(valueStr);
         System.out.println(BytesData.toText(bytesValue));
+        KVData kvdata = new KVData(keyStr, bytesValue, 0);
+        System.out.println(kvdata.getValue().getValue().toUTF8String());
+        String base58Str = bytesValue.getValue().toString();
+        System.out.println("base58Str = "+base58Str);
+        Assert.assertEquals(new String(Base58Utils.decode(base58Str),"utf-8"),valueStr);
     }
 }
