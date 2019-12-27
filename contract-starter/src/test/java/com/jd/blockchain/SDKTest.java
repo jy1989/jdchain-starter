@@ -7,6 +7,7 @@ import com.jd.blockchain.sdk.converters.ClientResolveUtil;
 import com.jd.blockchain.transaction.GenericValueHolder;
 import com.jd.blockchain.utils.Bytes;
 import com.jd.chain.contract.Guanghu;
+import org.junit.Before;
 import org.junit.Test;
 
 import static com.jd.blockchain.contract.SDKDemo_Constant.readChainCodes;
@@ -20,6 +21,12 @@ public class SDKTest extends SDK_Base_Demo {
     //because it need to connect the web, so make the switch;
     private boolean isTest = true;
     private String strDataAccount;
+    private BlockchainKeypair existUser;
+
+    @Before
+    public void setup(){
+        existUser = BlockchainKeyGenerator.getInstance().generate();
+    }
 
     @Test
     public void checkXml_existDataAcount(){
@@ -360,5 +367,137 @@ public class SDKTest extends SDK_Base_Demo {
         for(int i=0;i<15;i++){
             this.registerUser();
         }
+    }
+
+    /**
+     * use the exist user to sign;
+     */
+    @Test
+    public void registerNewUserByExistUser(){
+        //first invoke the case: registerExistUser(), to rigister user in the ledger;
+        //now use the existUser to sign;
+        // 在本地定义注册账号的 TX；
+        TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
+
+        BlockchainKeypair user = BlockchainKeyGenerator.getInstance().generate();
+        System.out.println("user'id="+user.getAddress());
+        txTemp.users().register(user.getIdentity());
+        // TX 准备就绪；
+        PreparedTransaction prepTx = txTemp.prepare();
+        prepTx.sign(existUser);
+
+        // 提交交易；
+        prepTx.commit();
+    }
+
+    /**
+     * insert data by the exist user; no think the permission;
+     */
+    @Test
+    public void insertDataByExistUser() {
+        if(!isTest) return;
+        // 在本地定义注册账号的 TX；
+        TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
+        //采用KeyGenerator来生成BlockchainKeypair;
+        BlockchainKeypair dataAccount = BlockchainKeyGenerator.getInstance().generate();
+
+        txTemp.dataAccounts().register(dataAccount.getIdentity());
+        txTemp.dataAccount(dataAccount.getAddress()).setText("key1","value1",-1);
+        //add some data for retrieve;
+        this.strDataAccount = dataAccount.getAddress().toBase58();
+        System.out.println("current dataAccount="+dataAccount.getAddress());
+        txTemp.dataAccount(dataAccount.getAddress()).setText("cc-fin01-01","{\"dest\":\"KA001\",\"id\":\"cc-fin01-01\",\"items\":\"FIN001|5000\",\"source\":\"FIN001\"}",-1);
+
+        // TX 准备就绪
+        PreparedTransaction prepTx = txTemp.prepare();
+        prepTx.sign(existUser);
+
+        // 提交交易；
+        TransactionResponse transactionResponse = prepTx.commit();
+        if(transactionResponse.isSuccess()){
+            System.out.println("result="+transactionResponse.isSuccess());
+        }else {
+            System.out.println("exception="+transactionResponse.getExecutionState().toString());
+        }
+    }
+
+    private void registerRole(String roleName){
+        // 在本地定义注册账号的 TX；
+        TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
+
+        // 定义角色权限；
+        txTemp.security().roles().configure(roleName).enable(LedgerPermission.APPROVE_TX)
+                .enable(LedgerPermission.REGISTER_USER).disable( LedgerPermission.REGISTER_DATA_ACCOUNT)
+                .enable(TransactionPermission.DIRECT_OPERATION);
+
+        // TX 准备就绪；
+        PreparedTransaction prepTx = txTemp.prepare();
+        prepTx.sign(adminKey);
+
+        // 提交交易；
+        prepTx.commit();
+    }
+
+    /**
+     * rigister the exist user to ledger;
+     */
+    private void registerExistUser(String roleName){
+        // 在本地定义注册账号的 TX；
+        TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
+        System.out.println("user'id="+existUser.getAddress());
+
+        txTemp.users().register(existUser.getIdentity());
+//        txTemp.security().authorziations().forUser(newUser.getIdentity()).authorize("ROLE-ADD-DATA").setPolicy(RolesPolicy.INTERSECT);
+        txTemp.security().authorziations().forUser(existUser.getIdentity()).unauthorize("DEFAULT").authorize(roleName);
+
+        // TX 准备就绪；
+        PreparedTransaction prepTx = txTemp.prepare();
+        prepTx.sign(adminKey);
+
+        // 提交交易；
+        prepTx.commit();
+        System.out.println("registerExistUser() done.");
+    }
+
+    private void checkInsertDataByExistUser() {
+        System.out.println("checkInsertDataByExistUser() start...");
+        if(!isTest) return;
+        // 在本地定义注册账号的 TX；
+        TransactionTemplate txTemp = blockchainService.newTransaction(ledgerHash);
+        //采用KeyGenerator来生成BlockchainKeypair;
+        BlockchainKeypair dataAccount = BlockchainKeyGenerator.getInstance().generate();
+
+        txTemp.dataAccounts().register(dataAccount.getIdentity());
+        txTemp.dataAccount(dataAccount.getAddress()).setText("key1","value1",-1);
+        //add some data for retrieve;
+        this.strDataAccount = dataAccount.getAddress().toBase58();
+        System.out.println("current dataAccount="+dataAccount.getAddress());
+        txTemp.dataAccount(dataAccount.getAddress()).setText("cc-fin01-01","{\"dest\":\"KA001\",\"id\":\"cc-fin01-01\",\"items\":\"FIN001|5000\",\"source\":\"FIN001\"}",-1);
+
+        // TX 准备就绪
+        PreparedTransaction prepTx = txTemp.prepare();
+        prepTx.sign(existUser);
+
+        // 提交交易；
+        TransactionResponse transactionResponse = prepTx.commit();
+        if(transactionResponse.isSuccess()){
+            System.out.println("result="+transactionResponse.isSuccess());
+        }else {
+            System.out.println("exception="+transactionResponse.getExecutionState().toString());
+        }
+    }
+
+    /**
+     * use the same blockchainService(connected by adminKey);
+     * because it's policy is at_least_one(see: DataAccountRegisterOperationHandle.java),
+     * although signed by existUser, the operation of "txTemp.dataAccounts().register(...)" also can passed;
+     * so you will use a new user to connect the gateway and signed by it. you can see the demo {@link SDKDemo_RegisterUser#checkPermission()}
+     */
+    @Test
+    public void checkPermission(){
+        String roleName = "ROLE-ADD-DATA";
+        registerRole(roleName);
+        registerExistUser(roleName);
+        checkInsertDataByExistUser();
     }
 }

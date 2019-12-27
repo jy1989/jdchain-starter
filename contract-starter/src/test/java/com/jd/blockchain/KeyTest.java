@@ -2,11 +2,16 @@ package com.jd.blockchain;
 
 import com.jd.blockchain.crypto.*;
 import com.jd.blockchain.ledger.BlockchainKeypair;
+import com.jd.blockchain.ledger.BytesData;
+import com.jd.blockchain.ledger.BytesValue;
+import com.jd.blockchain.transaction.KVData;
 import com.jd.blockchain.utils.codec.Base58Utils;
 import com.jd.blockchain.utils.io.ByteArray;
 import com.jd.blockchain.utils.security.ShaUtils;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 
 import static com.jd.blockchain.crypto.KeyGenUtils.encodePubKey;
 import static com.jd.blockchain.crypto.KeyGenUtils.encryptPrivKey;
@@ -32,12 +37,6 @@ public class KeyTest {
         Assert.assertEquals(privKeyStr,encodePrivKey(adminKey.getPrivKey(),pwdBytes));
     }
 
-//    public static String encodePubKey(PubKey pubKey) {
-//        byte[] pubKeyBytes = BytesUtils.concat(KeyGenUtils.PUB_KEY_FILE_MAGICNUM, pubKey.toBytes());
-//        String base58PubKey = Base58Utils.encode(pubKeyBytes);
-//        return base58PubKey;
-//    }
-
     public static String encodePrivKey(PrivKey privKey, byte[] pwdBytes) {
         byte[] encodedPrivKeyBytes = encryptPrivKey(privKey, pwdBytes);
         String base58PrivKey = Base58Utils.encode(encodedPrivKeyBytes);
@@ -57,5 +56,18 @@ public class KeyTest {
         System.out.println("pubKey="+base58PubKey);
         System.out.println("privKey="+base58PrivKey);
         System.out.println("base58PwdKey="+base58PwdKey);
+    }
+
+    @Test
+    public void checkBytesData() throws UnsupportedEncodingException {
+        String keyStr = "key2";
+        String valueStr = "value2";
+        BytesValue bytesValue = BytesData.fromText(valueStr);
+        System.out.println(BytesData.toText(bytesValue));
+        KVData kvdata = new KVData(keyStr, bytesValue, 0);
+        System.out.println(kvdata.getValue().getValue().toUTF8String());
+        String base58Str = bytesValue.getValue().toString();
+        System.out.println("base58Str = "+base58Str);
+        Assert.assertEquals(new String(Base58Utils.decode(base58Str),"utf-8"),valueStr);
     }
 }

@@ -20,18 +20,11 @@ public class SDKDemo_Constant {
     public static final String GW_PASSWORD = "DYu3G8aGTMBW1WrTw76zxQJQU4DHLw9MLyy7peG4LKkY";
 
     //localhost;
-//    public static final String GW_IPADDR = "localhost";
-//    public static final int GW_PORT = 11000;
-//    public static final String PUB_KEY = "3snPdw7i7PjVKiTH2VnXZu5H8QmNaSXpnk4ei533jFpuifyjS5zzH9";
-//    public static final String PRIV_KEY = "177gjzHTznYdPgWqZrH43W3yp37onm74wYXT4v9FukpCHBrhRysBBZh7Pzdo5AMRyQGJD7x";
-//    public static final String PASSWORD = "abc";
-
-    //peer3
-//    public static final String GW_IPADDR = "localhost";
-//    public static final int GW_PORT = 11000;
-//    public static final String PUB_KEY = "3snPdw7i7PifPuRX7fu3jBjsb3rJRfDe9GtbDfvFJaJ4V4hHXQfhwk";
-//    public static final String PRIV_KEY = "177gk1pudweTq5zgJTh8y3ENCTwtSFsKyX7YnpuKPo7rKgCkCBXVXh5z2syaTCPEMbuWRns";
-//    public static final String PASSWORD = "abc";
+//    public static final String GW_IPADDR = "jdchain-t.jd.com";
+//    public static final int GW_PORT = 8181;
+//    public static final String GW_PUB_KEY = "3snPdw7i7PfKAmHwKRFXyuEkahSGmCRNo7FbNtcCWbsSicneKLQTei";
+//    public static final String GW_PRIV_KEY = "177gjufTyEgebqDxSY8q44F6CGwD9xhWMrGW64NVCyj6WKoGbLpFWd5nj5ChyHeXuY9yhNh";
+//    public static final String GW_PASSWORD = "DYu3G8aGTMBW1WrTw76zxQJQU4DHLw9MLyy7peG4LKkY";
 
     public static PrivKey gwPrivkey0 = KeyGenUtils.decodePrivKey(GW_PRIV_KEY, GW_PASSWORD);
     public static PubKey gwPubKey0 = KeyGenUtils.decodePubKey(GW_PUB_KEY);
